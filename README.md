@@ -1,6 +1,6 @@
 # Push vs Pull: Keeping P2P Data Synchronized
 
-**CSC 466 course project, University of Victoria**
+**CSC 466 course project, University of Victoria** · [GitHub repo](https://github.com/Rahilyw/csc466-push-vs-pull) · [Website](https://rahilyw.github.io/csc466-push-vs-pull/)
 Rahil Wijeyesekera · Hamzah Banday · Prabhnoor Singh · Adithyakrishna Arunkumar
 
 We compare two ways of keeping shared data synchronized across a peer-to-peer network:
@@ -22,9 +22,9 @@ This repository is our project website and logbook. It holds the code, the exper
 | 1 | Bi-weekly update 1 | (log book) | Not started | [draft](docs/updates/update-01.md) |
 | 2 | Bi-weekly update 2 (midterm update) | (log book) | Not started | [draft](docs/updates/update-02-midterm.md) |
 | 3 | Log book | 5% | Ongoing | [LOGBOOK.md](LOGBOOK.md) |
-| 4 | Midterm presentation | 5% | Not started | [docs/presentations](docs/presentations/) |
-| 5 | Final presentation | 10% | Not started | [docs/presentations](docs/presentations/) |
-| 6 | Project report + code | 30% | Not started | [docs/report](docs/report/), [src](src/) |
+| 4 | Midterm presentation | 5% | Not started | [docs/presentations](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/presentations) |
+| 5 | Final presentation | 10% | Not started | [docs/presentations](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/presentations) |
+| 6 | Project report + code | 30% | Not started | [docs/report](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/report), [src](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/src) |
 
 When a PDF is submitted, add it next to its draft (for example `docs/updates/update-01.pdf`), link it in this table, and add a line to the [logbook](LOGBOOK.md).
 

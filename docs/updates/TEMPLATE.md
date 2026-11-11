@@ -3,7 +3,7 @@
 **CSC 466 · University of Victoria**
 Rahil Wijeyesekera · Hamzah Banday · Prabhnoor Singh · Adithyakrishna Arunkumar
 **Period covered:** YYYY-MM-DD to YYYY-MM-DD · **Submitted:** YYYY-MM-DD
-**Project site:** https://github.com/<owner>/<repo>
+**Project site:** https://rahilyw.github.io/csc466-push-vs-pull/
 
 ## 1. Summary
 Two or three sentences on where the project stands compared with the schedule in the proposal.
