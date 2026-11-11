@@ -1,0 +1,9 @@
+[project]
+name = "pushpull"
+version = "0.1.0"
+description = "Push vs pull synchronization testbed for a P2P key-value store (CSC 466)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,9 @@
+# GitHub Pages settings: serves README.md as the project website home page
+title: "Push vs Pull: Keeping P2P Data Synchronized"
+description: "CSC 466 course project: Rahil Wijeyesekera, Hamzah Banday, Prabhnoor Singh, Adithyakrishna Arunkumar"
+theme: jekyll-theme-cayman
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: false
