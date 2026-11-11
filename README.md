@@ -19,8 +19,8 @@ This repository is our project website and logbook. It holds the code, the exper
 | # | Deliverable | Weight | Status | Link |
 |---|-------------|--------|--------|------|
 | 0 | Project proposal / outline | 5% | Submitted Oct 10, 2026 | [PDF](docs/proposal/CSC466_Push_vs_Pull_Project_Proposal.pdf) |
-| 1 | Bi-weekly update 1 | (log book) | Not started | [draft](docs/updates/update-01.md) |
-| 2 | Bi-weekly update 2 (midterm update) | (log book) | Not started | [draft](docs/updates/update-02-midterm.md) |
+| 1 | Bi-weekly update 1 | (log book) | PDF ready Nov 10, 2026. Not yet posted on the course thread. | [PDF](docs/updates/update-01.pdf) |
+| 2 | Bi-weekly update 2 (midterm update) | (log book) | PDF ready Nov 10, 2026. Not yet posted on the course thread. | [PDF](docs/updates/update-02-midterm.pdf) |
 | 3 | Log book | 5% | Ongoing | [LOGBOOK.md](LOGBOOK.md) |
 | 4 | Midterm presentation | 5% | Not started | [docs/presentations](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/presentations) |
 | 5 | Final presentation | 10% | Not started | [docs/presentations](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/presentations) |
@@ -36,7 +36,7 @@ When a PDF is submitted, add it next to its draft (for example `docs/updates/upd
 - Each key has one designated writer and an increasing version number, so there are no conflicting edits.
 - **Topology:** a ring, where each peer talks to its two neighbours. The same topology is used for push and pull.
 - **Push:** a new version goes to both neighbours and is forwarded the first time it is received. The version check stops duplicates.
-- **Pull:** a peer asks each neighbour for its version list, then requests only the records that are newer.
+- **Pull:** a peer sends its version summary to each neighbour and applies the newer records in the reply. One round trip. The proposal's two-step request is recorded as changed in the [midterm update](docs/updates/update-02-midterm.pdf).
 - **Network sizes:** 8 peers for the main runs, with smaller checks at 4 and 16.
 - A separate runner script starts runs, generates updates and collects logs. It never relays sync traffic.
 
@@ -66,8 +66,8 @@ When a PDF is submitted, add it next to its draft (for example `docs/updates/upd
 
 | Week | Plan | Status |
 |------|------|--------|
-| 1 | Review prior work; peer connections, record storage, version checks | ☐ |
-| 2 | Implement push and pull; final-state correctness on a small network | ☐ |
+| 1 | Review prior work; peer connections, record storage, version checks | Store and version checks done Nov 10. Connections not started. |
+| 2 | Implement push and pull; final-state correctness on a small network | Not started |
 | 3–4 | Workload generation, delay controls, logging; repeated experiments | ☐ |
 | 5 | Analyse results, make plots, investigate unexpected behaviour | ☐ |
 | 6 | Final report, demo, presentation | ☐ |
