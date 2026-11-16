@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "status": "converged",
+  "config": {
+    "mode": "pull",
+    "peers": 8,
+    "rate": 1.0,
+    "pull_interval": 0.5,
+    "delay_ms": 100,
+    "seed": 4,
+    "duration": 8.0,
+    "settle": 2.0,
+    "idle": 2.0,
+    "keys": 16
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41"
+  },
+  "source_sha256": "33b8d6e14a5bf4aa17dc64942fa6a6e167caba618a6419b5c2e001cc194b1a9c",
+  "workload_sha256": "e0ca5b5320a88953e79d0a1b7583d09ffaae5e3dbc8f5ce30b5b4040f3123e91",
+  "windows": {
+    "start": 2280.715559536,
+    "workload_end": 2288.715559536,
+    "convergence_deadline": 2290.715559536,
+    "idle_start": 2290.715559536,
+    "end": 2292.715559536
+  },
+  "metrics": {
+    "converged": true,
+    "propagation_samples": 64,
+    "expected_propagation_samples": 64,
+    "missing_propagation_samples": 0,
+    "propagation_median_seconds": 0.7085149779998119,
+    "propagation_p95_seconds": 1.711064392299886,
+    "final_convergence_seconds": 1.7209049859998231,
+    "window_seconds": 12.0,
+    "messages": 768,
+    "bytes": 51728,
+    "by_message_type": {
+      "pull_request": {
+        "messages": 384,
+        "bytes": 32956
+      },
+      "pull_reply": {
+        "messages": 384,
+        "bytes": 18772
+      }
+    },
+    "idle_seconds": 2.0,
+    "idle_messages": 128,
+    "idle_bytes": 9536,
+    "idle_messages_per_second": 64.0,
+    "idle_bytes_per_second": 4768.0
+  },
+  "process_ids": [
+    1959,
+    1960,
+    1961,
+    1962,
+    1963,
+    1964,
+    1965,
+    1966
+  ],
+  "final_state_matches": true,
+  "final_records": {
+    "key-7": {
+      "key": "key-7",
+      "value": "value-0-4da4f9fc",
+      "version": 1,
+      "writer": 7
+    },
+    "key-3": {
+      "key": "key-3",
+      "value": "value-1-b8a1abcd",
+      "version": 1,
+      "writer": 3
+    },
+    "key-12": {
+      "key": "key-12",
+      "value": "value-5-8ca59966",
+      "version": 2,
+      "writer": 4
+    },
+    "key-4": {
+      "key": "key-4",
+      "value": "value-3-1710cf53",
+      "version": 1,
+      "writer": 4
+    },
+    "key-2": {
+      "key": "key-2",
+      "value": "value-4-0512bd13",
+      "version": 1,
+      "writer": 2
+    },
+    "key-9": {
+      "key": "key-9",
+      "value": "value-6-ccea71ff",
+      "version": 1,
+      "writer": 1
+    },
+    "key-1": {
+      "key": "key-1",
+      "value": "value-7-38d048ec",
+      "version": 1,
+      "writer": 1
+    }
+  },
+  "errors": []
+}

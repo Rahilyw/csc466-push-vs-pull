@@ -1,147 +1,139 @@
 # Push vs Pull: Keeping P2P Data Synchronized
 
-**CSC 466 course project, University of Victoria** · [GitHub repo](https://github.com/Rahilyw/csc466-push-vs-pull) · [Website](https://rahilyw.github.io/csc466-push-vs-pull/)
+**University of Victoria · CSC 466 · Python 3.11+**
+
+Verified locally: **54 automated tests passing** · **20 converged eight-peer pilot runs**
+
 Rahil Wijeyesekera · Hamzah Banday · Prabhnoor Singh · Adithyakrishna Arunkumar
 
-We compare two ways of keeping shared data synchronized across a peer-to-peer network:
+[Latest update PDF](docs/updates/update-03-networking-and-pilot.pdf) ·
+[Experiment guide](experiments/README.md) · [Results](results/README.md) ·
+[Logbook](LOGBOOK.md) · [Project website](https://rahilyw.github.io/csc466-push-vs-pull/)
 
-- **Push**: a peer sends an update to its neighbours as soon as it learns about a change.
-- **Pull**: each peer checks its neighbours at a fixed interval and requests anything newer.
+A small peer-to-peer key-value store for comparing **update propagation speed**
+with **communication overhead**. Peers communicate over TCP in a ring, with two
+neighbours each. A key has one designated writer and increasing version numbers.
 
-Our question: **how does each approach trade update speed for communication overhead as the update rate and network delay change?**
+| Push | Pull |
+|---|---|
+| Forward a newly accepted version to both neighbours immediately. | Periodically send each neighbour a version summary. |
+| Drop stale and duplicate records without forwarding. | Receive only newer records in one reply on the same TCP connection. |
+| No periodic synchronization traffic while idle. | Polls continue during idle windows, including empty replies. |
 
-This repository is our project website and logbook. It holds the code, the experiment data, and every update we submit.
+The pull implementation follows the [midterm design](docs/updates/update-02-midterm.md):
+one request and one reply per neighbour, replacing the proposal's older two-step
+exchange. The experiment controller never relays synchronization records.
 
----
-
-## Project deliverables
-
-| # | Deliverable | Weight | Status | Link |
-|---|-------------|--------|--------|------|
-| 0 | Project proposal / outline | 5% | Submitted Oct 10, 2026 | [PDF](docs/proposal/CSC466_Push_vs_Pull_Project_Proposal.pdf) |
-| 1 | Bi-weekly update 1 | (log book) | PDF ready Nov 10, 2026. Not yet posted on the course thread. | [PDF](docs/updates/update-01.pdf) |
-| 2 | Bi-weekly update 2 (midterm update) | (log book) | PDF ready Nov 10, 2026. Not yet posted on the course thread. | [PDF](docs/updates/update-02-midterm.pdf) |
-| 3 | Log book | 5% | Ongoing | [LOGBOOK.md](LOGBOOK.md) |
-| 4 | Midterm presentation | 5% | Not started | [docs/presentations](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/presentations) |
-| 5 | Final presentation | 10% | Not started | [docs/presentations](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/presentations) |
-| 6 | Project report + code | 30% | Not started | [docs/report](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/report), [src](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/src) |
-
-When a PDF is submitted, add it next to its draft (for example `docs/updates/update-01.pdf`), link it in this table, and add a line to the [logbook](LOGBOOK.md).
-
----
-
-## Approach (from the proposal)
-
-- A small P2P key-value store in Python. Each peer runs as its own process on one machine and talks to others over TCP sockets.
-- Each key has one designated writer and an increasing version number, so there are no conflicting edits.
-- **Topology:** a ring, where each peer talks to its two neighbours. The same topology is used for push and pull.
-- **Push:** a new version goes to both neighbours and is forwarded the first time it is received. The version check stops duplicates.
-- **Pull:** a peer sends its version summary to each neighbour and applies the newer records in the reply. One round trip. The proposal's two-step request is recorded as changed in the [midterm update](docs/updates/update-02-midterm.pdf).
-- **Network sizes:** 8 peers for the main runs, with smaller checks at 4 and 16.
-- A separate runner script starts runs, generates updates and collects logs. It never relays sync traffic.
-
-### Experiment parameters
-
-| Parameter | Values |
-|-----------|--------|
-| Update rate | 1 update / 5 s (low), 1 update / s (high) |
-| Pull interval | 0.5 s, 2 s, 5 s |
-| Added one-way delay | 0 ms, 100 ms (applied in the messaging layer) |
-| Peers | 8 (main), 4 and 16 (scaling checks) |
-| Repetitions | ≥ 5 seeds per configuration, same seed replayed for push and pull |
-| Idle period | Fixed window with no updates, to measure polling traffic |
-
-### Metrics
-
-| Metric | Definition |
-|--------|------------|
-| Update propagation delay | Time from creating a version until each peer holds it (or newer). Median and p95. |
-| Communication overhead | Serialized application bytes and message count, including requests, replies and duplicates (no TCP/IP headers). |
-| Final convergence time | Time from the last update until all peers hold the final version of every key. A run that never converges is recorded as a timeout. |
-| Idle traffic | Bytes and messages per second during the idle period. |
-
----
-
-## Schedule
-
-| Week | Plan | Status |
-|------|------|--------|
-| 1 | Review prior work; peer connections, record storage, version checks | Store done Nov 10; TCP messaging done Nov 15. |
-| 2 | Implement push and pull; final-state correctness on a small network | Four-peer TCP correctness checks pass in both modes at 0 ms and 100 ms added delay, Nov 15. |
-| 3–4 | Workload generation, delay controls, logging; repeated experiments | ☐ |
-| 5 | Analyse results, make plots, investigate unexpected behaviour | ☐ |
-| 6 | Final report, demo, presentation | ☐ |
-
----
-
-## Repository layout
-
-```
-LOGBOOK.md            dated project log (newest first)
-docs/
-  proposal/           submitted proposal PDF
-  updates/            bi-weekly updates (Markdown draft + submitted PDF)
-  meetings/           team meeting notes
-  presentations/      midterm and final slides
-  report/             final report
-src/pushpull/         Python testbed (peer, store, push, pull, transport)
-experiments/          experiment configs and runner
-results/raw/          CSV logs from runs
-results/plots/        generated figures
-tests/                correctness tests
-```
-
-## Running the code
-
-Requires Python 3.11 or later.
+## Quick start
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+source .venv/bin/activate       # Windows: .venv\Scripts\activate
+python -m pip install pytest
 python -m pytest
 ```
 
-To run only the new TCP and synchronization tests:
+The runtime, runner and result summaries use Python's standard library. The
+broader `requirements.txt` also lists packages planned for data analysis/plots.
+
+Run a short eight-process experiment:
+
+```bash
+python experiments/run.py --mode push --peers 8 --rate 1 --seed 1 \
+  --duration 8 --settle 2 --idle 2 --delay-ms 100
+```
+
+Use `--mode pull --pull-interval 0.5` with the same seed and workload parameters
+for the matching pull run. Each invocation creates a new timestamped directory
+under `results/raw`. See the [experiment guide](experiments/README.md) for the
+paired pilot command, every parameter, output formats and metric definitions.
+
+## What is implemented
+
+| Component | Behaviour and evidence |
+|---|---|
+| Versioned store | Increasing versions, designated-writer local writes, stale/duplicate rejection; original store tests retained. |
+| TCP transport | Four-byte length prefix + UTF-8 JSON; configurable sender delay; exact application bytes/messages by type. |
+| Push / pull peers | Forward only accepted push records; periodic one-round-trip pull; monotonic acceptance/send events. |
+| Correctness checks | Four real-loopback peers in both modes at 0 and 100 ms; duplicate suppression, exact poll exchanges, framing and cleanup. |
+| Experiment runner | One spawned process per peer; seeded writes, independent TCP ring, fixed workload/settling/idle windows, raw CSV/JSON. |
+| Metrics | Propagation median/p95, final convergence/timeout, total messages/bytes and idle traffic; independently recomputed from logs. |
+
+For focused checks:
 
 ```bash
 python -m pytest tests/test_transport.py tests/test_peers.py
+python -m pytest tests/test_metrics.py tests/test_experiment.py
+PYTHONASYNCIODEBUG=1 python -W error -m pytest
 ```
 
-These use real TCP sockets on loopback with OS-assigned ports. Four peers run in
-one Python process for correctness checks: final records in both modes at 0 ms
-and 100 ms added one-way delay, push duplicate/stale suppression, and one pull
-request plus one reply per neighbour (including empty replies). Transport tests
-also check framing, sender byte counts, delay in both directions, and timeouts.
-These are correctness checks, not performance results.
+Single-process socket tests establish correctness. Multi-process runner tests
+also verify separate worker PIDs, deterministic workloads, saved-log metrics,
+cleanup after controller failure and explicit convergence timeouts. Performance
+observations belong in [results](results/README.md), with their raw evidence and
+limitations, rather than being inferred from test execution times.
 
-`Peer` in `src/pushpull/peer.py` exposes async `start`, `local_write`, `poll_once`,
-and `stop` methods. For a ring with dynamic ports, start peers with
-`periodic_pull=False`, assign each peer's two `neighbours` from their `address`
-properties, then call `start_polling()` on pull peers. Polls do not overlap;
-when a round exceeds `pull_interval`, the next round starts after it completes.
-Each accepted version, including local writes, appends a monotonic timestamp,
-peer ID, key and version to `peer.acceptances`. Background failures are retained
-in `peer.errors`; exchanges have timeouts and no automatic retries.
+## Results and next steps
 
-`peer.transport.sent` exposes sender counts by message type; `totals` sums them.
-Bytes include the four-byte length prefix and UTF-8 JSON, excluding TCP/IP
-headers. Each frame is delayed once at its sender, including pull replies.
+The [results index](results/README.md) documents the first repeated eight-peer
+pilot and links every saved run. These short loopback observations are preliminary.
+The planned full study still includes both update rates, all three pull intervals,
+longer workload/idle windows, and 4/16-peer scaling checks.
 
-The experiment runner (`experiments/run.py`) remains a stub. Multi-process
-orchestration, seeded workloads, durable log export, metric aggregation and
-eight-peer performance experiments are still to be built.
+| Planned parameter | Values |
+|---|---|
+| Update rate | 1 update / 5 s; 1 update / s |
+| Pull interval | 0.5 s; 2 s; 5 s |
+| Added one-way delay | 0 ms; 100 ms per application message |
+| Peers | 8 main; 4 and 16 scaling checks |
+| Repetitions | At least five matched seeds per configuration |
 
----
+Peers currently assume a stable ring on one host. There is no churn/recovery
+protocol or automatic retry. Byte counts include the four-byte application
+prefix and JSON, excluding TCP/IP headers and controller messages. Acceptance
+and send events use the shared host monotonic clock; raw logs make the summaries
+auditable. The [experiment guide](experiments/README.md) explains deadlines,
+missing samples, equal observation windows and quantile aggregation.
 
-## How we use this repo
+## Repository map
 
-1. **Log as you go.** After a meeting or a meaningful work session, add a dated entry to [LOGBOOK.md](LOGBOOK.md): what was done, by whom, and what's next. The grade covers the log, not only the code.
-2. **Meetings.** Copy [docs/meetings/TEMPLATE.md](docs/meetings/TEMPLATE.md) to `docs/meetings/YYYY-MM-DD.md`.
-3. **Bi-weekly updates.** Write the update in `docs/updates/`, export it to PDF, commit the PDF, post it to the course project thread, and update the table above.
-4. **Code.** Work on a branch and open a pull request into `main`. Keep `main` runnable.
-5. **Results.** Commit the CSVs that a figure or the report depends on. Note in the logbook which commit and seed produced them.
+```text
+src/pushpull/       store, TCP transport, peers, experiment orchestration, metrics
+experiments/       command-line runner, matched-seed pilot, log reanalysis guide
+tests/             store, socket, metrics and spawned-process checks
+results/           findings index, raw run logs and reproducible summaries
+LOGBOOK.md         dated contributions, verification and next tasks
+docs/              proposal, historical updates, meetings and presentation/report folders
+```
+
+## Contributions
+
+| Team member | Recorded contributions |
+|---|---|
+| **Adithyakrishna Arunkumar — Adi ([akaAdiArun](https://github.com/akaAdiArun))** | TCP transport; push/pull synchronization; acceptance/send logging; loopback and multi-process tests; seeded runner; metrics, pilot and documentation. |
+| **Rahil Wijeyesekera ([Rahilyw](https://github.com/Rahilyw))** | Repository and GitHub Pages setup; original versioned store and four store tests; logbook structure and first two project updates. |
+| **Hamzah Banday** | Project proposal and shared team design; further individual contributions to be recorded by the teammate. |
+| **Prabhnoor Singh** | Project proposal and shared team design; further individual contributions to be recorded by the teammate. |
+
+See [LOGBOOK.md](LOGBOOK.md) for dated evidence. Keep teammates' records when
+adding new work; work on a branch and review/test before publishing to `main`.
+
+## Course deliverables
+
+| Deliverable | Recorded status | Link |
+|---|---|---|
+| Proposal | Submitted October 10, 2026 | [PDF](docs/proposal/CSC466_Push_vs_Pull_Project_Proposal.pdf) |
+| Bi-weekly update 1 | PDF prepared November 10; course posting not recorded | [Draft](docs/updates/update-01.md) · [PDF](docs/updates/update-01.pdf) |
+| Midterm update | PDF prepared November 10; course posting not recorded | [Draft](docs/updates/update-02-midterm.md) · [PDF](docs/updates/update-02-midterm.pdf) |
+| Project update 3 | Prepared November 15; not posted to the course thread | [Draft](docs/updates/update-03-networking-and-pilot.md) · [PDF](docs/updates/update-03-networking-and-pilot.pdf) |
+| Logbook | Ongoing | [Entries](LOGBOOK.md) |
+| Presentations | Pending | [Folder](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/presentations) |
+| Final report | Pending; separate from these implementation changes | [Folder](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/report) |
+
+The dated updates describe their original periods. New implementation progress
+is recorded in the logbook and results index; their PDFs were not rewritten.
 
 ## Reference
 
-[1] A. Demers, D. Greene, C. Hauser, W. Irish, J. Larson, S. Shenker, H. Sturgis, D. Swinehart and D. Terry. "Epidemic Algorithms for Replicated Database Maintenance." *Proc. 6th ACM Symposium on Principles of Distributed Computing*, 1987, pp. 1–12. doi:[10.1145/41840.41841](https://doi.org/10.1145/41840.41841)
+A. Demers et al., “Epidemic Algorithms for Replicated Database Maintenance,”
+*PODC*, 1987, pp. 1–12. [doi:10.1145/41840.41841](https://doi.org/10.1145/41840.41841)

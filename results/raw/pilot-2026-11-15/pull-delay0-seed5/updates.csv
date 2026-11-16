@@ -1,0 +1,9 @@
+sequence,scheduled_offset,timestamp,writer,key,value,version
+0,0.0,2294.660336182,0,key-8,value-0-bde5c099,1
+1,1.0,2295.659277563,3,key-11,value-1-cb91ce37,1
+2,2.0,2296.660964241,0,key-0,value-2-d7210dff,1
+3,3.0,2297.661770007,6,key-14,value-3-c6a53877,1
+4,4.0,2298.660559519,7,key-7,value-4-a6233255,1
+5,5.0,2299.659722963,1,key-1,value-5-e6a16a3b,1
+6,6.0,2300.659087085,5,key-5,value-6-1cfb10f6,1
+7,7.0,2301.660544982,3,key-11,value-7-7814e8a2,2

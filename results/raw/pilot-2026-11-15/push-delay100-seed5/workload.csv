@@ -1,0 +1,9 @@
+sequence,scheduled_offset,writer,key,value
+0,0.0,0,key-8,value-0-bde5c099
+1,1.0,3,key-11,value-1-cb91ce37
+2,2.0,0,key-0,value-2-d7210dff
+3,3.0,6,key-14,value-3-c6a53877
+4,4.0,7,key-7,value-4-a6233255
+5,5.0,1,key-1,value-5-e6a16a3b
+6,6.0,5,key-5,value-6-1cfb10f6
+7,7.0,3,key-11,value-7-7814e8a2
