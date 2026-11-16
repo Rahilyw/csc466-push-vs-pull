@@ -1,0 +1,93 @@
+# Running experiments
+
+The controller starts independent peer processes with Python's `spawn` method.
+Each process owns its store and two TCP ring neighbours. Control pipes carry
+configuration, local writes and collected logs; the controller never relays
+synchronization records.
+
+## One run
+
+From the repository root, using Python 3.11+:
+
+```bash
+python experiments/run.py --mode push --peers 8 --rate 1 \
+  --duration 60 --settle 5 --idle 20 --delay-ms 100 --seed 1 \
+  --output results/raw/my-push-run
+```
+
+Replay with `--mode pull --pull-interval 0.5` and a different output directory.
+Keep all workload parameters and the seed unchanged for a paired comparison.
+Existing output directories are rejected rather than overwritten. The runner,
+metrics and scripts need only the standard library; pytest runs the tests.
+
+| Option | Meaning | Default |
+|---|---|---|
+| `--mode` | `push` or `pull` | Required |
+| `--peers` | Ring size, at least 3 | 8 |
+| `--rate` | Updates per second; 0 gives an idle-only run | 1 |
+| `--keys` | Number of possible keys | 16 |
+| `--seed` | Seed for key/value selection | 1 |
+| `--pull-interval` | Poll start-to-start interval, seconds; polls never overlap | 0.5 |
+| `--delay-ms` | Added one-way delay on every application frame | 0 |
+| `--duration` | Fixed workload window, seconds | 60 |
+| `--settle` | Fixed no-write window before the convergence deadline | 5 |
+| `--idle` | Fixed no-write measurement window after that deadline | 20 |
+| `--output` | New result directory | Timestamped directory under `results/raw` |
+
+Updates are scheduled regularly, starting at offset 0 while offset < duration.
+A seeded generator chooses keys and values; key index modulo peer count fixes
+its designated writer. Creation timestamps record when writes actually happen,
+so controller/worker scheduling delay is not counted as network propagation.
+
+## Matched-seed pilot
+
+```bash
+python experiments/pilot.py --output results/raw/my-pilot \
+  --seeds 1 2 3 4 5 --duration 8 --settle 2 --idle 2
+python experiments/summarize.py results/raw/my-pilot
+```
+
+The pilot runs 8 peers, both modes, delays 0 and 100 ms, rate 1 update/s and a
+0.5 s pull interval: 20 runs. Mode order alternates by seed. The second command
+recomputes every metric from CSV logs before writing the comparison. It rejects
+failed/incomplete runs, mismatched workloads, different source fingerprints,
+duplicate seeds and unequal seed sets. This short pilot is not the full proposal
+matrix of rates, pull intervals, sizes and longer observation windows.
+
+## What gets saved
+
+| File | Contents |
+|---|---|
+| `workload.csv` | Seeded update schedule, writer, key and value |
+| `updates.csv` | Actual local creation timestamps and versions |
+| `acceptances.csv` | Timestamp, peer, key and accepted version |
+| `traffic.csv` | Successful send timestamp, sender, message type and application bytes |
+| `result.json` | Configuration, environment, source/workload SHA-256, windows, process IDs, final state, errors and metrics |
+| `failure.txt` | Diagnostic traceback if the controller or a worker fails |
+| Pilot `summary.csv/json` | Mean and sample standard deviation across matched repetitions |
+
+## Metric definitions and limits
+
+- **Propagation:** for every created version and every peer (including the
+  writer), find its first acceptance of that version or a newer one before the
+  convergence deadline. Report median/p95 in each run. Missing samples remain
+  explicit; a missing final version yields `timeout`, not zero latency.
+- **Convergence:** time from the last actual write until every peer holds every
+  final version, measured from acceptance logs. Deadline = start + duration +
+  settle. `final_state_matches` also checks values and writers when collecting.
+- **Overhead:** all successful application sends in `[start, end)`, including
+  duplicate pushes and empty pull replies. Count the four-byte prefix plus UTF-8
+  JSON; exclude TCP/IP headers and controller traffic.
+- **Idle:** sends in `[start + duration + settle, end)` divided by its fixed
+  duration. A timeout may still have pending updates during this window; do not
+  interpret its traffic as converged idle overhead.
+
+All windows have the same duration across paired runs, independent of convergence.
+Monotonic clocks are comparable across processes on this single host. This is
+loopback with application delay, not an emulation of a wide-area network.
+Source fingerprints cover all `src/pushpull/*.py` files. Summary latency fields
+are **means of per-run medians/p95s**, not pooled quantiles; standard deviations
+are across seeds, not confidence intervals. Application send counters record
+successful drain, not confirmed delivery. Peers have timeouts but no retry or
+churn recovery protocol. A nonconverged CLI run exits with status 1 and retains
+its result logs; operational failures retain `failure.txt` and raise.

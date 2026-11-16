@@ -10,6 +10,7 @@ import asyncio
 from collections.abc import Awaitable
 from dataclasses import asdict, dataclass
 import math
+import socket
 import time
 from typing import Any
 
@@ -64,16 +65,17 @@ class Peer:
         # Background failures are retained for the runner/tests, never hidden.
         self.errors: list[Exception] = []
         self._bind_address = (host, port)
-        self._server: asyncio.Server | None = None
+        self._listener: socket.socket | None = None
+        self._acceptor: asyncio.Task[None] | None = None
         self._poller: asyncio.Task[None] | None = None
         self._handlers: set[asyncio.Task[None]] = set()
         self._poll_lock = asyncio.Lock()
 
     @property
     def address(self) -> Address:
-        if self._server is None:
+        if self._listener is None:
             raise RuntimeError("peer is not listening")
-        host, port = self._server.sockets[0].getsockname()[:2]
+        host, port = self._listener.getsockname()[:2]
         return host, port
 
     async def start(self, *, periodic_pull: bool = True) -> None:
@@ -82,36 +84,57 @@ class Peer:
         For dynamic rings, start all peers with periodic_pull=False, assign
         their neighbours from peer.address, then call start_polling().
         """
-        if self._server is not None:
+        if self._listener is not None:
             raise RuntimeError("peer is already started")
-        self._server = await asyncio.start_server(self._connected, *self._bind_address)
+        listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            listener.setblocking(False)
+            listener.bind(self._bind_address)
+            listener.listen(128)
+        except BaseException:
+            listener.close()
+            raise
+        self._listener = listener
+        self._acceptor = asyncio.create_task(self._accept_loop(listener))
         if periodic_pull and self.mode == "pull":
             self.start_polling()
 
     def start_polling(self) -> None:
-        if self._server is None or self.mode != "pull":
+        if self._listener is None or self.mode != "pull":
             raise RuntimeError("polling requires a started pull peer")
         if self._poller is not None:
             raise RuntimeError("polling is already running")
         self._poller = asyncio.create_task(self._poll_loop())
 
     async def stop(self) -> None:
-        """Close the listener and cancel/join this peer's background work."""
-        server, self._server = self._server, None
-        if server is not None:
-            server.close()
+        """Join the accept loop before closing its socket, then stop handlers."""
+        listener, self._listener = self._listener, None
         if self._poller is not None:
             self._poller.cancel()
             await asyncio.gather(self._poller, return_exceptions=True)
             self._poller = None
+        if listener is not None:
+            # Wake sock_accept rather than cancelling it between accepting a
+            # socket and taking ownership. Owning the accept loop also avoids
+            # Python 3.12's Server.close/_attach race with pending TCP accepts.
+            try:
+                if self._acceptor is not None and not self._acceptor.done():
+                    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as wake:
+                        wake.setblocking(False)
+                        host, port = listener.getsockname()
+                        await asyncio.get_running_loop().sock_connect(
+                            wake, ("127.0.0.1" if host == "0.0.0.0" else host, port)
+                        )
+                if self._acceptor is not None:
+                    await self._acceptor
+            finally:
+                listener.close()
+                self._acceptor = None
         handlers = list(self._handlers)
         for task in handlers:
             task.cancel()
         await asyncio.gather(*handlers, return_exceptions=True)
-        # wait_closed also waits for accepted sockets on Python 3.12+. Close
-        # their handlers first, including clients stalled in an incomplete frame.
-        if server is not None:
-            await server.wait_closed()
 
     def _log_acceptance(self, record: Record) -> None:
         self.acceptances.append(
@@ -119,7 +142,7 @@ class Peer:
         )
 
     async def local_write(self, key: str, value: str) -> Record:
-        if self._server is None:
+        if self._listener is None:
             raise RuntimeError("peer is not started")
         record = self.store.local_write(key, value, writer=self.peer_id)
         self._log_acceptance(record)
@@ -150,7 +173,7 @@ class Peer:
 
     async def poll_once(self) -> None:
         """One summary request and one records reply per neighbour, concurrently."""
-        if self.mode != "pull" or self._server is None:
+        if self.mode != "pull" or self._listener is None:
             raise RuntimeError("polling requires a started pull peer")
         async with self._poll_lock:
             message = {"type": "pull_request", "versions": self.store.version_vector()}
@@ -178,20 +201,33 @@ class Peer:
             # starts immediately; otherwise preserve the start-to-start period.
             await asyncio.sleep(max(0, self.pull_interval - (time.monotonic() - started)))
 
-    def _connected(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> None:
-        if self._server is None:
-            writer.close()
-            return
-        task = asyncio.create_task(self._handle(reader, writer))
-        self._handlers.add(task)
+    async def _accept_loop(self, listener: socket.socket) -> None:
+        loop = asyncio.get_running_loop()
+        while True:
+            try:
+                client, _ = await loop.sock_accept(listener)
+            except OSError as exc:
+                self.errors.append(exc)
+                return
+            if self._listener is None:
+                client.close()
+                return
+            task = asyncio.create_task(self._serve_client(client))
+            self._handlers.add(task)
 
-        def finished(task: asyncio.Task[None]) -> None:
-            # Cancellation before a task's first step skips its finally block.
-            # Always close the accepted socket even in that shutdown race.
-            writer.close()
-            self._handlers.discard(task)
+            def finished(task: asyncio.Task[None], client=client) -> None:
+                # Even cancellation before the first task step releases the fd.
+                client.close()
+                self._handlers.discard(task)
 
-        task.add_done_callback(finished)
+            task.add_done_callback(finished)
+
+    async def _serve_client(self, client: socket.socket) -> None:
+        try:
+            reader, writer = await asyncio.open_connection(sock=client)
+            await self._handle(reader, writer)
+        except Exception as exc:
+            self.errors.append(exc)
 
     async def _handle(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> None:
         try:

@@ -187,3 +187,30 @@ def test_stop_closes_pending_frame_and_periodic_poller():
             await peer.stop()
 
     asyncio.run(scenario())
+
+
+def test_shutdown_while_tcp_connections_are_arriving():
+    async def scenario():
+        import gc
+        loop = asyncio.get_running_loop()
+        previous = loop.get_exception_handler()
+        failures = []
+        loop.set_exception_handler(lambda _, context: failures.append(context))
+        try:
+            for _ in range(10):
+                peer = Peer(0, mode="push")
+                await peer.start()
+                message = {"type": "push", "record": {"key": "k", "value": "v", "version": 1, "writer": 1}}
+                clients = [asyncio.create_task(Transport().exchange(peer.address, message)) for _ in range(8)]
+                # Stop during connection establishment, before all accepts have
+                # become application handlers. Refused clients are expected.
+                await asyncio.sleep(0)
+                await asyncio.wait_for(peer.stop(), 2)
+                await asyncio.gather(*clients, return_exceptions=True)
+                await asyncio.sleep(0)
+            gc.collect()
+            assert not failures, failures
+        finally:
+            loop.set_exception_handler(previous)
+
+    asyncio.run(scenario())

@@ -12,6 +12,7 @@ from dataclasses import dataclass
 import json
 import math
 import struct
+import time
 from typing import Any
 
 Address = tuple[str, int]
@@ -26,6 +27,13 @@ class ProtocolError(ValueError):
 class Traffic:
     messages: int = 0
     bytes: int = 0
+
+
+@dataclass(frozen=True)
+class SendEvent:
+    timestamp: float
+    message_type: str
+    bytes: int
 
 
 def encode_message(message: dict[str, Any]) -> bytes:
@@ -67,6 +75,7 @@ class Transport:
         self.delay_ms = delay_ms
         self.timeout = timeout
         self._sent: dict[str, Traffic] = {}
+        self.events: list[SendEvent] = []
 
     @property
     def sent(self) -> dict[str, Traffic]:
@@ -93,6 +102,7 @@ class Transport:
         self._sent[message["type"]] = Traffic(
             previous.messages + 1, previous.bytes + len(frame)
         )
+        self.events.append(SendEvent(time.monotonic(), message["type"], len(frame)))
 
     async def exchange(
         self, address: Address, message: dict[str, Any], *, reply: bool = False
