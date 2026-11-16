@@ -21,6 +21,29 @@ Entry template — copy this block to the top of the log:
 
 ---
 
+## 2026-11-15 — TCP push/pull milestone verified locally
+**Who:** Adi (`akaAdiArun`), with Codex assistance
+**Done:**
+- Started local branch `adi/tcp-push-pull` from main `1324c57`. Verified the existing four store tests before implementation; networking and synchronization were still stubs.
+- Implemented four-byte length-prefixed UTF-8 JSON over TCP, configurable one-way delay per frame, and sender message/byte counts by type. Bytes include application framing, excluding TCP/IP headers.
+- Implemented push forwarding only for accepted newer versions, periodic pull with one summary request and one newer-records reply per neighbour, and in-memory monotonic acceptance events for later metric computation.
+- Added real-loopback four-peer tests for final records in push and pull at both 0 ms and 100 ms added delay, bounded push forwarding under duplicate/stale injections, and exact pull request/reply counts and bytes (including empty replies).
+- Added transport framing, malformed-frame, delay, timeout and peer-shutdown checks. A pending-frame shutdown test exposed a wait ordering issue on Python 3.12; handlers now close before waiting for the server to finish closing. The asyncio debug check also caught sockets left open when a handler was cancelled before its first step; a completion callback now closes them in that case.
+- Verification on Python 3.12.14: `python -m pytest` — **25 passed**. Also verified with `PYTHONASYNCIODEBUG=1 python -W error -m pytest` — **25 passed**. Used a workspace virtual environment with pytest installed.
+- Added README test commands and API/counter notes. Changes are local for review; no push, merge, PR, report, PDF or course post was made.
+
+**Decisions / problems:**
+- Followed the midterm's one-round-trip pull design. The four peers share an event loop in these tests but exchange synchronization traffic over real TCP sockets. This is correctness evidence, not a multi-process performance experiment.
+- Acceptance events and counters are in memory; durable export and aggregate metrics remain runner work. Exchanges time out without automatic retries; background errors are retained on each peer.
+
+**Next:**
+- [ ] Build the seeded multi-process runner, durable logs and metric aggregation
+- [ ] Run the planned repeated eight-peer experiments and idle windows; record actual results
+
+**Links:** [peer](src/pushpull/peer.py) · [transport](src/pushpull/transport.py) · [peer tests](tests/test_peers.py) · [transport tests](tests/test_transport.py)
+
+---
+
 ## 2026-11-10 — Bi-weekly updates written
 **Who:** Rahil
 **Done:**

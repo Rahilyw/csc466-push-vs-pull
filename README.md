@@ -66,8 +66,8 @@ When a PDF is submitted, add it next to its draft (for example `docs/updates/upd
 
 | Week | Plan | Status |
 |------|------|--------|
-| 1 | Review prior work; peer connections, record storage, version checks | Store and version checks done Nov 10. Connections not started. |
-| 2 | Implement push and pull; final-state correctness on a small network | Not started |
+| 1 | Review prior work; peer connections, record storage, version checks | Store done Nov 10; TCP messaging done Nov 15. |
+| 2 | Implement push and pull; final-state correctness on a small network | Four-peer TCP correctness checks pass in both modes at 0 ms and 100 ms added delay, Nov 15. |
 | 3–4 | Workload generation, delay controls, logging; repeated experiments | ☐ |
 | 5 | Analyse results, make plots, investigate unexpected behaviour | ☐ |
 | 6 | Final report, demo, presentation | ☐ |
@@ -102,7 +102,35 @@ pip install -r requirements.txt
 python -m pytest
 ```
 
-The experiment runner (`experiments/run.py`) is a stub for now. This section will be filled in once it works.
+To run only the new TCP and synchronization tests:
+
+```bash
+python -m pytest tests/test_transport.py tests/test_peers.py
+```
+
+These use real TCP sockets on loopback with OS-assigned ports. Four peers run in
+one Python process for correctness checks: final records in both modes at 0 ms
+and 100 ms added one-way delay, push duplicate/stale suppression, and one pull
+request plus one reply per neighbour (including empty replies). Transport tests
+also check framing, sender byte counts, delay in both directions, and timeouts.
+These are correctness checks, not performance results.
+
+`Peer` in `src/pushpull/peer.py` exposes async `start`, `local_write`, `poll_once`,
+and `stop` methods. For a ring with dynamic ports, start peers with
+`periodic_pull=False`, assign each peer's two `neighbours` from their `address`
+properties, then call `start_polling()` on pull peers. Polls do not overlap;
+when a round exceeds `pull_interval`, the next round starts after it completes.
+Each accepted version, including local writes, appends a monotonic timestamp,
+peer ID, key and version to `peer.acceptances`. Background failures are retained
+in `peer.errors`; exchanges have timeouts and no automatic retries.
+
+`peer.transport.sent` exposes sender counts by message type; `totals` sums them.
+Bytes include the four-byte length prefix and UTF-8 JSON, excluding TCP/IP
+headers. Each frame is delayed once at its sender, including pull replies.
+
+The experiment runner (`experiments/run.py`) remains a stub. Multi-process
+orchestration, seeded workloads, durable log export, metric aggregation and
+eight-peer performance experiments are still to be built.
 
 ---
 
