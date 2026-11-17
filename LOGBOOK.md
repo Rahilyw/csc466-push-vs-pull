@@ -21,6 +21,21 @@ Entry template — copy this block to the top of the log:
 
 ---
 
+## 2026-11-16 — Configurable paired pilot runs
+**Who:** Adithyakrishna Arunkumar / Adi (`akaAdiArun`)
+**Done:**
+- Added pilot CLI options for peer count, update rate, pull interval, key count and one or more one-way delays. The defaults still reproduce the existing 20-run setup; mode order still alternates by seed and workloads remain paired.
+- Validate all configurations before creating output directories or starting workers. Reject duplicate seeds/delays and invalid values, including non-finite delays. Fractional delay labels preserve their values in result directory names.
+- Added 11 CLI checks covering default run selection, invalid-input behaviour and a real paired three-process idle-only smoke run with custom parameters. This smoke run checks the CLI; it is not a new performance result.
+- Verified `python -m pytest`: **65 passed in 18.65 s**. `git diff --check` passed. Updated the experiment guide with a future low-rate/2-second-poll example and the README test count.
+
+**Next:**
+- [ ] Use the new options for longer matched-seed measurements across the remaining rates, intervals and peer counts
+
+**Links:** [pilot CLI](experiments/pilot.py) · [CLI tests](tests/test_pilot.py) · [experiment guide](experiments/README.md)
+
+---
+
 ## 2026-11-15 — Seeded runner, measured pilot and repository organization
 **Who:** Adithyakrishna Arunkumar / Adi (`akaAdiArun`)
 **Done:**

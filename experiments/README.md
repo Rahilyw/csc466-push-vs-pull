@@ -47,12 +47,27 @@ python experiments/pilot.py --output results/raw/my-pilot \
 python experiments/summarize.py results/raw/my-pilot
 ```
 
-The pilot runs 8 peers, both modes, delays 0 and 100 ms, rate 1 update/s and a
-0.5 s pull interval: 20 runs. Mode order alternates by seed. The second command
+By default the pilot runs 8 peers, both modes, delays 0 and 100 ms, rate 1 update/s
+and a 0.5 s pull interval: 20 runs. Mode order alternates by seed. The second command
 recomputes every metric from CSV logs before writing the comparison. It rejects
 failed/incomplete runs, mismatched workloads, different source fingerprints,
 duplicate seeds and unequal seed sets. This short pilot is not the full proposal
 matrix of rates, pull intervals, sizes and longer observation windows.
+
+The pilot also accepts `--peers`, `--rate`, `--pull-interval`, `--keys`, and one or
+more values for `--delay-ms`. For example, to prepare a paired low-rate comparison:
+
+```bash
+python experiments/pilot.py --output results/raw/low-rate-interval2 \
+  --seeds 1 2 3 4 5 --peers 8 --rate 0.2 --pull-interval 2 \
+  --keys 16 --delay-ms 0 100 --duration 60 --settle 10 --idle 20
+```
+
+Each invocation holds the rate, interval, peer/key counts and window lengths
+fixed across its runs. Use separate output directories for different setups;
+the summary rejects comparisons mixing those fixed settings. Duplicate seeds or
+delays and invalid settings are rejected before any output directory or worker
+is created. This example is a command for future measurements, not a result.
 
 ## What gets saved
 
