@@ -116,24 +116,29 @@ docs/              proposal, historical updates, meetings and presentation/repor
 
 ## Contributions
 
-**Adithyakrishna Arunkumar (Adi) is the lead implementation and experimentation
-contributor for the work documented here.** Adi built TCP framing and push/pull
-synchronization, the seeded multi-process experiment runner, socket and process
-tests, and propagation, convergence, and traffic metrics. Adi ran the initial
-eight-peer pilot and added raw-log verification and checks for missing planned
-runs. Adi also launched the longer benchmark and verified its first matched
-set against the raw logs. See the [implementation history](https://github.com/Rahilyw/csc466-push-vs-pull/compare/1324c57...58eac1c)
-and [logbook](LOGBOOK.md).
+The team co-authored the proposal, which describes the TCP ring, the push and
+pull comparison, and the experiment plan. [Project proposal](docs/proposal/CSC466_Push_vs_Pull_Project_Proposal.pdf)
 
-| Team member | Recorded contributions |
-|---|---|
-| **Adithyakrishna Arunkumar ([akaAdiArun](https://github.com/akaAdiArun))** | Lead implementation and experimentation contributor. |
-| **Rahil Wijeyesekera ([Rahilyw](https://github.com/Rahilyw))** | Repository and GitHub Pages setup, original versioned store and its tests, first two project updates. |
-| **Hamzah Banday** | Project proposal and shared team design; further individual contributions to be recorded by the teammate. |
-| **Prabhnoor Singh** | Project proposal and shared team design; further individual contributions to be recorded by the teammate. |
+- **Rahil Wijeyesekera** set up the repository, GitHub Pages, and the logbook.
+  He implemented the original versioned store and its four tests and wrote the
+  first two project updates. [Store and project setup](https://github.com/Rahilyw/csc466-push-vs-pull/commit/1cdcead)
+- **Hamzah Banday** co-authored the project proposal and contributed to the
+  team's study design for comparing push and pull. [Proposal and study design](docs/proposal/CSC466_Push_vs_Pull_Project_Proposal.pdf)
+- **Prabhnoor Singh** co-authored the project proposal and contributed to the
+  team's study design for comparing push and pull. [Proposal and study design](docs/proposal/CSC466_Push_vs_Pull_Project_Proposal.pdf)
+- **Adithyakrishna Arunkumar (Adi)** implemented the TCP push and pull protocols
+  and added loopback tests for both. He built the seeded multi-process benchmark
+  runner and its propagation, convergence, and traffic metrics, then ran the
+  first eight-peer pilot. He later built raw-log verification tools and run
+  manifest checks to audit benchmark results. For the longer benchmark, he set
+  the measurement windows, ran the first matched set of four eight-peer runs,
+  and verified their metrics from the raw logs. That set covered both modes
+  at 0 and 100 ms added loopback delay with seed 1, at 0.2 updates/s and a 0.5 s
+  pull interval.
+  [Implementation history](https://github.com/Rahilyw/csc466-push-vs-pull/compare/1324c57...58eac1c) ·
+  [Verified benchmark checkpoint](https://github.com/Rahilyw/csc466-push-vs-pull/blob/d898e0ce5d498ff2fb771f5f09bfe09778ad16fa/results/README.md)
 
-See [LOGBOOK.md](LOGBOOK.md) for dated evidence. Keep teammates' records when
-adding new work; work on a branch and review/test before publishing to `main`.
+[Project logbook](LOGBOOK.md)
 
 ## Course deliverables
 
