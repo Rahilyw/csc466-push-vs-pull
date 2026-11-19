@@ -1,0 +1,441 @@
+{
+  "source_sha256": "33b8d6e14a5bf4aa17dc64942fa6a6e167caba618a6419b5c2e001cc194b1a9c",
+  "manifest_provenance": "before_run",
+  "counts": {
+    "converged": 4,
+    "timeout": 0,
+    "error": 0,
+    "crash": 0,
+    "unfinished": 16
+  },
+  "runs": [
+    {
+      "directory": "pull-delay0-seed1",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 96,
+        "expected_propagation_samples": 96,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.08041440200000238,
+        "propagation_p95_seconds": 1.0024984527499967,
+        "final_convergence_seconds": 0.5873281599999984,
+        "window_seconds": 105.0,
+        "messages": 6720,
+        "bytes": 514210,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 3360,
+            "bytes": 380300
+          },
+          "pull_reply": {
+            "messages": 3360,
+            "bytes": 133910
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 1280,
+        "idle_bytes": 109440,
+        "idle_messages_per_second": 64.0,
+        "idle_bytes_per_second": 5472.0
+      },
+      "errors": [],
+      "workload_sha256": "ae982e31f38e8bf6d7751cdfec3c0b1d04537b713e5f1082a4add89e4e110301",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay0-seed1",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 96,
+        "expected_propagation_samples": 96,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.0029390365000097063,
+        "propagation_p95_seconds": 0.012483464249967824,
+        "final_convergence_seconds": 0.012128251999968143,
+        "window_seconds": 105.0,
+        "messages": 192,
+        "bytes": 18160,
+        "by_message_type": {
+          "push": {
+            "messages": 192,
+            "bytes": 18160
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "ae982e31f38e8bf6d7751cdfec3c0b1d04537b713e5f1082a4add89e4e110301",
+      "status": "converged"
+    },
+    {
+      "directory": "pull-delay100-seed1",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 96,
+        "expected_propagation_samples": 96,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.7465045770000245,
+        "propagation_p95_seconds": 1.7603944055000085,
+        "final_convergence_seconds": 1.787767352000003,
+        "window_seconds": 105.0,
+        "messages": 6720,
+        "bytes": 513414,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 3360,
+            "bytes": 379438
+          },
+          "pull_reply": {
+            "messages": 3360,
+            "bytes": 133976
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 1280,
+        "idle_bytes": 109440,
+        "idle_messages_per_second": 64.0,
+        "idle_bytes_per_second": 5472.0
+      },
+      "errors": [],
+      "workload_sha256": "ae982e31f38e8bf6d7751cdfec3c0b1d04537b713e5f1082a4add89e4e110301",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay100-seed1",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 96,
+        "expected_propagation_samples": 96,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.20338356299993166,
+        "propagation_p95_seconds": 0.4065899164999962,
+        "final_convergence_seconds": 0.4062891859999809,
+        "window_seconds": 104.99999999999994,
+        "messages": 192,
+        "bytes": 18160,
+        "by_message_type": {
+          "push": {
+            "messages": 192,
+            "bytes": 18160
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "ae982e31f38e8bf6d7751cdfec3c0b1d04537b713e5f1082a4add89e4e110301",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay0-seed2",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "pull-delay0-seed2",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "push-delay100-seed2",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "pull-delay100-seed2",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "pull-delay0-seed3",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "push-delay0-seed3",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "pull-delay100-seed3",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "push-delay100-seed3",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "push-delay0-seed4",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "pull-delay0-seed4",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "push-delay100-seed4",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "pull-delay100-seed4",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "pull-delay0-seed5",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "push-delay0-seed5",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "pull-delay100-seed5",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    },
+    {
+      "directory": "push-delay100-seed5",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "status": "unfinished"
+    }
+  ]
+}

@@ -2,17 +2,11 @@
 
 **University of Victoria · CSC 466 · Python 3.11+**
 
-Verified locally: **83 automated tests passing** · **20 converged eight-peer pilot runs**
-
 Rahil Wijeyesekera · Hamzah Banday · Prabhnoor Singh · Adithyakrishna Arunkumar
 
-[Latest update PDF](docs/updates/update-03-networking-and-pilot.pdf) ·
-[Experiment guide](experiments/README.md) · [Results](results/README.md) ·
-[Logbook](LOGBOOK.md) · [Project website](https://rahilyw.github.io/csc466-push-vs-pull/)
-
-A small peer-to-peer key-value store for comparing **update propagation speed**
-with **communication overhead**. Peers communicate over TCP in a ring, with two
-neighbours each. A key has one designated writer and increasing version numbers.
+This peer-to-peer key-value store keeps a copy of each key at every peer.
+Each key has one writer, and increasing version numbers let peers recognize
+older copies. Peers exchange updates over TCP with their two neighbours in a ring.
 
 | Push | Pull |
 |---|---|
@@ -23,6 +17,24 @@ neighbours each. A key has one designated writer and increasing version numbers.
 The pull implementation follows the [midterm design](docs/updates/update-02-midterm.md):
 one request and one reply per neighbour, replacing the proposal's older two-step
 exchange. The experiment controller never relays synchronization records.
+
+**Original pilot.** All 20 eight-peer runs converged. At 1 update per second
+and a 0.5-second pull interval, push propagated updates faster at both delay
+settings and sent **128 messages per run**, compared with **768 for pull**.
+Push sent no idle messages, while pull sent **64 messages per second** during
+the pilot's idle window. See the [verified pilot summary](results/raw/pilot-2026-11-15/summary.json).
+
+**Longer benchmark.** The November 19 study uses 60-second workload windows
+to compare two update rates and three pull intervals, with scaling checks at
+4 and 16 peers. At the November 19 checkpoint, **4 of 160 runs** were
+verified, all converged, and 156 remained. Those four runs cover the first
+seed at 0.2 updates/s and a 0.5-second pull interval at both loopback delays.
+See the [benchmark results and coverage](results/README.md),
+[verified checkpoint](results/raw/benchmark-2026-11-19/peers8-rate0.2-pull0.5/audit.json),
+and [reproduction instructions](results/raw/benchmark-2026-11-19/plan.md).
+
+[Experiment guide](experiments/README.md) · [Logbook](LOGBOOK.md) ·
+[Project update PDF](docs/updates/update-03-networking-and-pilot.pdf)
 
 ## Quick start
 
@@ -73,12 +85,7 @@ cleanup after controller failure and explicit convergence timeouts. Performance
 observations belong in [results](results/README.md), with their raw evidence and
 limitations, rather than being inferred from test execution times.
 
-## Results and next steps
-
-The [results index](results/README.md) documents the first repeated eight-peer
-pilot and links every saved run. These short loopback observations are preliminary.
-The planned full study still includes both update rates, all three pull intervals,
-longer workload/idle windows, and 4/16-peer scaling checks.
+## Benchmark settings and future work
 
 | Planned parameter | Values |
 |---|---|
@@ -88,9 +95,10 @@ longer workload/idle windows, and 4/16-peer scaling checks.
 | Peers | 8 main; 4 and 16 scaling checks |
 | Repetitions | At least five matched seeds per configuration |
 
-Peers currently assume a stable ring on one host. There is no churn/recovery
-protocol or automatic retry. Byte counts include the four-byte application
-prefix and JSON, excluding TCP/IP headers and controller messages. Acceptance
+Peer-outage testing remains future work. The current experiments use a stable
+ring on one host, with configurable added one-way loopback delay. Byte counts
+include the four-byte application prefix and JSON and exclude TCP/IP headers
+and controller messages. Acceptance
 and send events use the shared host monotonic clock; raw logs make the summaries
 auditable. The [experiment guide](experiments/README.md) explains deadlines,
 missing samples, equal observation windows and quantile aggregation.
@@ -108,10 +116,19 @@ docs/              proposal, historical updates, meetings and presentation/repor
 
 ## Contributions
 
+**Adithyakrishna Arunkumar (Adi) is the lead implementation and experimentation
+contributor for the work documented here.** Adi built TCP framing and push/pull
+synchronization, the seeded multi-process experiment runner, socket and process
+tests, and propagation, convergence, and traffic metrics. Adi ran the initial
+eight-peer pilot and added raw-log verification and checks for missing planned
+runs. Adi also launched the longer benchmark and verified its first matched
+set against the raw logs. See the [implementation history](https://github.com/Rahilyw/csc466-push-vs-pull/compare/1324c57...58eac1c)
+and [logbook](LOGBOOK.md).
+
 | Team member | Recorded contributions |
 |---|---|
-| **Adithyakrishna Arunkumar — Adi ([akaAdiArun](https://github.com/akaAdiArun))** | TCP transport; push/pull synchronization; acceptance/send logging; loopback and multi-process tests; seeded runner; metrics, pilot and documentation. |
-| **Rahil Wijeyesekera ([Rahilyw](https://github.com/Rahilyw))** | Repository and GitHub Pages setup; original versioned store and four store tests; logbook structure and first two project updates. |
+| **Adithyakrishna Arunkumar ([akaAdiArun](https://github.com/akaAdiArun))** | Lead implementation and experimentation contributor. |
+| **Rahil Wijeyesekera ([Rahilyw](https://github.com/Rahilyw))** | Repository and GitHub Pages setup, original versioned store and its tests, first two project updates. |
 | **Hamzah Banday** | Project proposal and shared team design; further individual contributions to be recorded by the teammate. |
 | **Prabhnoor Singh** | Project proposal and shared team design; further individual contributions to be recorded by the teammate. |
 

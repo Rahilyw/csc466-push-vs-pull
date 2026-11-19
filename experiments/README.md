@@ -92,6 +92,12 @@ November 15 pilot now has an `archived_plan` manifest reconstructed on November 
 from its documented 20-run setup and recorded configurations. This is a retrospective
 audit, not a claim that the original experiment was preregistered.
 
+For a batch with unfinished runs or measured failures, use `--audit`. This
+verifies the available raw CSVs and writes an `audit.json` with a status for every
+planned run. An audit records convergence timeouts separately from errors,
+crashes, and unfinished runs. Use the standard summary command once all runs
+have converged. See the [longer benchmark plan](../results/raw/benchmark-2026-11-19/plan.md).
+
 ## What gets saved
 
 | File | Contents |
