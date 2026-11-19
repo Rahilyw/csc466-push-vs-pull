@@ -69,17 +69,41 @@ the summary rejects comparisons mixing those fixed settings. Duplicate seeds or
 delays and invalid settings are rejected before any output directory or worker
 is created. This example is a command for future measurements, not a result.
 
+### Completeness checks
+
+Before starting the first worker, the pilot saves `manifest.json`: the expected
+directory and complete configuration for every seed/mode/delay combination,
+plus the source fingerprint. The plan remains available if a run fails.
+
+Reanalysis requires every planned result and rejects unexpected result directories,
+configuration changes and source mismatches before replacing any summaries. This
+also catches a missing *entire mode or delay*, which matching only the surviving
+seed sets cannot detect. Metrics are still recomputed from the raw CSV logs.
+
+Older datasets without a manifest require an explicit override:
+
+```bash
+python experiments/summarize.py results/raw/older-dataset --allow-legacy
+```
+
+That option emits a warning and labels completeness `legacy_unverified` in the
+summary; it cannot establish how many runs were originally intended. The published
+November 15 pilot now has an `archived_plan` manifest reconstructed on November 18
+from its documented 20-run setup and recorded configurations. This is a retrospective
+audit, not a claim that the original experiment was preregistered.
+
 ## What gets saved
 
 | File | Contents |
 |---|---|
+| Pilot `manifest.json` | Expected run directories/configurations, source fingerprint and plan provenance |
 | `workload.csv` | Seeded update schedule, writer, key and value |
 | `updates.csv` | Actual local creation timestamps and versions |
 | `acceptances.csv` | Timestamp, peer, key and accepted version |
 | `traffic.csv` | Successful send timestamp, sender, message type and application bytes |
 | `result.json` | Configuration, environment, source/workload SHA-256, windows, process IDs, final state, errors and metrics |
 | `failure.txt` | Diagnostic traceback if the controller or a worker fails |
-| Pilot `summary.csv/json` | Mean and sample standard deviation across matched repetitions |
+| Pilot `summary.csv/json` | Mean and sample standard deviation across matched repetitions; JSON also records completeness verification |
 
 ## Metric definitions and limits
 

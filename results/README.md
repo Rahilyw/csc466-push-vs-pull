@@ -82,6 +82,14 @@ vary on another run. Stored raw logs reproduce the displayed summaries exactly.
 Each directory contains the workload schedule, actual writes, acceptance events,
 send events and result metadata.
 
+**November 18 audit:** all 20 runs passed reanalysis against an explicit
+[run manifest](raw/pilot-2026-11-15/manifest.json). It was reconstructed from the
+published setup and recorded configurations, with provenance `archived_plan`;
+it is not a preregistration. No measurements were rerun or changed. The summary
+JSON now records the 20 expected and 20 observed results. New pilots save their
+manifests before starting, so missing whole configurations cannot silently pass
+as a complete comparison. See the [completeness checks](../experiments/README.md#completeness-checks).
+
 | Seed | Push, 0 ms | Pull, 0 ms | Push, 100 ms | Pull, 100 ms |
 |---|---|---|---|---|
 | 1 | [raw logs](raw/pilot-2026-11-15/push-delay0-seed1/) | [raw logs](raw/pilot-2026-11-15/pull-delay0-seed1/) | [raw logs](raw/pilot-2026-11-15/push-delay100-seed1/) | [raw logs](raw/pilot-2026-11-15/pull-delay100-seed1/) |

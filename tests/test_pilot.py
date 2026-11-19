@@ -28,6 +28,10 @@ def test_defaults_keep_twenty_matched_runs(pilot, tmp_path, monkeypatch):
     summaries = []
 
     def record(config, output):
+        # The complete plan must exist before even the first worker is launched.
+        manifest = json.loads((output.parent / "manifest.json").read_text())
+        assert len(manifest["runs"]) == 20
+        assert manifest["provenance"] == "before_run"
         seen.append((config, output))
         return {"status": "converged", "metrics": {"messages": 0}}
 
@@ -96,3 +100,19 @@ def test_custom_pilot_cli_runs_real_paired_processes(tmp_path):
         }
     summary = json.loads((output / "summary.json").read_text())
     assert len(summary["rows"]) == 2
+    assert summary["completeness"] == {
+        "status": "complete", "expected_runs": 2, "observed_runs": 2,
+        "manifest_provenance": "before_run",
+    }
+
+
+def test_worker_failure_preserves_full_plan(pilot, tmp_path, monkeypatch):
+    def fail(*args):
+        raise RuntimeError("injected experiment failure")
+
+    monkeypatch.setattr(pilot, "run_experiment", fail)
+    output = tmp_path / "interrupted"
+    with pytest.raises(RuntimeError, match="injected experiment failure"):
+        pilot.main(["--output", str(output)])
+    assert len(json.loads((output / "manifest.json").read_text())["runs"]) == 20
+    assert not (output / "summary.json").exists()

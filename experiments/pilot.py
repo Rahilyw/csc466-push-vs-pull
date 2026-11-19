@@ -1,13 +1,33 @@
 """Run matched-seed push/pull comparisons for a configurable experiment setup."""
 
 import argparse
+from dataclasses import asdict
+import json
 from pathlib import Path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from pushpull.experiment import Config, run_experiment
+from pushpull.experiment import Config, run_experiment, source_fingerprint
 from summarize import write_summary
+
+
+def build_manifest(configurations):
+    """Record every expected run, including ones that have not started yet."""
+    runs = []
+    for config in configurations:
+        delay = float(config.delay_ms)
+        label = str(int(delay)) if delay.is_integer() else repr(delay)
+        runs.append({
+            "directory": f"{config.mode}-delay{label}-seed{config.seed}",
+            "config": asdict(config),
+        })
+    return {
+        "schema_version": 1,
+        "provenance": "before_run",
+        "source_sha256": source_fingerprint(),
+        "runs": runs,
+    }
 
 
 def main(argv=None):
@@ -44,10 +64,12 @@ def main(argv=None):
     except ValueError as exc:
         parser.error(str(exc))
     args.output.mkdir(parents=True, exist_ok=False)
-    for config in configurations:
-        delay = float(config.delay_ms)
-        delay_label = str(int(delay)) if delay.is_integer() else repr(delay)
-        name = f"{config.mode}-delay{delay_label}-seed{config.seed}"
+    manifest = build_manifest(configurations)
+    (args.output / "manifest.json").write_text(
+        json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+    )
+    for config, planned in zip(configurations, manifest["runs"]):
+        name = planned["directory"]
         result = run_experiment(config, args.output / name)
         print(f"{name}: {result['status']}, {result['metrics']['messages']} messages", flush=True)
         if result["status"] != "converged":

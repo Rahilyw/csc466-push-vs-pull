@@ -2,7 +2,7 @@
 
 **University of Victoria · CSC 466 · Python 3.11+**
 
-Verified locally: **65 automated tests passing** · **20 converged eight-peer pilot runs**
+Verified locally: **83 automated tests passing** · **20 converged eight-peer pilot runs**
 
 Rahil Wijeyesekera · Hamzah Banday · Prabhnoor Singh · Adithyakrishna Arunkumar
 
@@ -57,7 +57,7 @@ paired pilot command, every parameter, output formats and metric definitions.
 | Push / pull peers | Forward only accepted push records; periodic one-round-trip pull; monotonic acceptance/send events. |
 | Correctness checks | Four real-loopback peers in both modes at 0 and 100 ms; duplicate suppression, exact poll exchanges, framing and cleanup. |
 | Experiment runner | One spawned process per peer; seeded writes, independent TCP ring, fixed workload/settling/idle windows, raw CSV/JSON. |
-| Metrics | Propagation median/p95, final convergence/timeout, total messages/bytes and idle traffic; independently recomputed from logs. |
+| Metrics | Propagation median/p95, final convergence/timeout, total messages/bytes and idle traffic; raw-log recomputation and planned-run completeness checks. |
 
 For focused checks:
 

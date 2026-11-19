@@ -22,6 +22,12 @@
     "push-delay100-seed5/result.json"
   ],
   "source_sha256": "33b8d6e14a5bf4aa17dc64942fa6a6e167caba618a6419b5c2e001cc194b1a9c",
+  "completeness": {
+    "status": "complete",
+    "expected_runs": 20,
+    "observed_runs": 20,
+    "manifest_provenance": "archived_plan"
+  },
   "latency_summary": "mean and sample standard deviation of per-run quantiles; not pooled quantiles",
   "rows": [
     {

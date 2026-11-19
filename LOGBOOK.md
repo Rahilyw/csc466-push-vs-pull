@@ -21,6 +21,23 @@ Entry template — copy this block to the top of the log:
 
 ---
 
+## 2026-11-18 — Verify experiment completeness before summarizing
+**Who:** Adithyakrishna Arunkumar / Adi (`akaAdiArun`)
+**Done:**
+- Investigated a result-validation gap: copying only the five pull/0 ms runs out of the published 20-run pilot still produced a summary. Surviving seed sets alone cannot reveal an entirely missing configuration.
+- Pilots now save a manifest of every planned directory/configuration and source fingerprint before starting workers. A failed pilot retains that full plan.
+- Reanalysis requires the planned run set and rejects missing/extra results, changed configurations and source mismatches before replacing summaries. Raw CSV metric recomputation remains in place. Legacy runs require an explicit override and are marked `legacy_unverified` with a warning.
+- Added 18 regression checks, including missing whole modes/delays, malformed plans, metadata mismatches, corrupted traffic counts, preservation of existing summaries, and planning before workers start.
+- Reaudited all 20 published pilot runs using a clearly labeled retrospective manifest built from the published setup and recorded configurations. All passed; original measurements are unchanged. The plan is marked `archived_plan`, not preregistered.
+- Verified `python -m pytest`: **83 passed in 22.73 s**. Focused pilot/summary checks: **29 passed in 3.53 s**. `git diff --check` passed. Updated the experiment guide, results notes and README.
+
+**Next:**
+- [ ] Run the remaining rate/interval/scaling comparisons with manifests generated before execution
+
+**Links:** [pilot](experiments/pilot.py) · [summary validation](experiments/summarize.py) · [regression checks](tests/test_summary.py) · [audited pilot](results/README.md)
+
+---
+
 ## 2026-11-16 — Configurable paired pilot runs
 **Who:** Adithyakrishna Arunkumar / Adi (`akaAdiArun`)
 **Done:**
