@@ -158,3 +158,40 @@ def test_cli_missing_manifest_reports_actionable_error_without_traceback(sample)
     assert "missing manifest.json" in result.stderr
     assert "--allow-legacy" in result.stderr
     assert "Traceback" not in result.stderr
+
+
+def test_audit_separates_timeout_crash_and_unfinished_runs(sample):
+    root, summary, _ = sample
+    path = root / "pull-delay0-seed1/result.json"
+    result = json.loads(path.read_text())
+    # A deliberately earlier deadline leaves the final writes outside it.
+    result["windows"]["convergence_deadline"] = result["windows"]["start"]
+
+    def read(name, **types):
+        with (path.parent / name).open(newline="", encoding="utf-8") as stream:
+            return [{k: types.get(k, str)(v) for k, v in row.items()}
+                    for row in csv.DictReader(stream)]
+
+    result["metrics"] = summary.summarize(
+        read("updates.csv", timestamp=float, version=int),
+        read("acceptances.csv", timestamp=float, peer_id=int, version=int),
+        read("traffic.csv", timestamp=float, bytes=int),
+        peers=result["config"]["peers"],
+        **{k: result["windows"][k] for k in ("start", "convergence_deadline", "idle_start", "end")},
+    )
+    result["status"] = "timeout"
+    path.write_text(json.dumps(result))
+    crashed = root / "push-delay0-seed1"
+    (crashed / "result.json").unlink()
+    (crashed / "failure.txt").write_text("RuntimeError: worker exited\n")
+    interrupted = root / "pull-delay100-seed1"
+    (interrupted / "result.json").unlink()
+    (interrupted / "failure.txt").write_text("KeyboardInterrupt\n")
+
+    audit = summary.write_audit(root)
+    assert audit["counts"] == {"converged": 1, "timeout": 1, "error": 0, "crash": 1, "unfinished": 1}
+    outcomes = {run["directory"]: run for run in audit["runs"]}
+    assert outcomes["pull-delay0-seed1"]["metrics"]["final_convergence_seconds"] is None
+    assert outcomes["pull-delay0-seed1"]["metrics"]["missing_propagation_samples"] > 0
+    assert outcomes["push-delay0-seed1"]["diagnostic"] == "push-delay0-seed1/failure.txt"
+    assert not (root / "summary.json").exists()
