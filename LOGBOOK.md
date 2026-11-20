@@ -24,13 +24,14 @@ Entry template — copy this block to the top of the log:
 ## 2026-11-19 — Longer benchmark verification
 **Who:** Adithyakrishna Arunkumar / Adi (`akaAdiArun`)
 
-- Audited the sequential benchmark against the manifests and raw logs. Recorded
-  160 converged runs, 0 timeouts, 0 measured errors,
-  0 crashes, and 0 unfinished runs across 160 planned runs.
+- Audited the sequential benchmark against the manifests and raw logs. All
+  160 runs converged across eight batches, with zero timeouts, measured errors,
+  crashes, or unfinished runs.
 - Ran the full test suite after the measured queue exited. 84 tests
   passed in 21.69 seconds.
 - Updated the shared README and current results pages with the verified study
   coverage, matched comparisons, and reproduction instructions.
+- Confirmed that Project Update 3 was posted in Teams for the November 16 deadline.
 
 [Verified results](results/README.md) · [Benchmark plan](results/raw/benchmark-2026-11-19/plan.md)
 

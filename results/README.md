@@ -190,11 +190,11 @@ as a complete comparison. See the [completeness checks](../experiments/README.md
 
 | Seed | Push, 0 ms | Pull, 0 ms | Push, 100 ms | Pull, 100 ms |
 |---|---|---|---|---|
-| 1 | [raw logs](raw/pilot-2026-11-15/push-delay0-seed1/) | [raw logs](raw/pilot-2026-11-15/pull-delay0-seed1/) | [raw logs](raw/pilot-2026-11-15/push-delay100-seed1/) | [raw logs](raw/pilot-2026-11-15/pull-delay100-seed1/) |
-| 2 | [raw logs](raw/pilot-2026-11-15/push-delay0-seed2/) | [raw logs](raw/pilot-2026-11-15/pull-delay0-seed2/) | [raw logs](raw/pilot-2026-11-15/push-delay100-seed2/) | [raw logs](raw/pilot-2026-11-15/pull-delay100-seed2/) |
-| 3 | [raw logs](raw/pilot-2026-11-15/push-delay0-seed3/) | [raw logs](raw/pilot-2026-11-15/pull-delay0-seed3/) | [raw logs](raw/pilot-2026-11-15/push-delay100-seed3/) | [raw logs](raw/pilot-2026-11-15/pull-delay100-seed3/) |
-| 4 | [raw logs](raw/pilot-2026-11-15/push-delay0-seed4/) | [raw logs](raw/pilot-2026-11-15/pull-delay0-seed4/) | [raw logs](raw/pilot-2026-11-15/push-delay100-seed4/) | [raw logs](raw/pilot-2026-11-15/pull-delay100-seed4/) |
-| 5 | [raw logs](raw/pilot-2026-11-15/push-delay0-seed5/) | [raw logs](raw/pilot-2026-11-15/pull-delay0-seed5/) | [raw logs](raw/pilot-2026-11-15/push-delay100-seed5/) | [raw logs](raw/pilot-2026-11-15/pull-delay100-seed5/) |
+| 1 | [Run record](raw/pilot-2026-11-15/push-delay0-seed1/result.json) | [Run record](raw/pilot-2026-11-15/pull-delay0-seed1/result.json) | [Run record](raw/pilot-2026-11-15/push-delay100-seed1/result.json) | [Run record](raw/pilot-2026-11-15/pull-delay100-seed1/result.json) |
+| 2 | [Run record](raw/pilot-2026-11-15/push-delay0-seed2/result.json) | [Run record](raw/pilot-2026-11-15/pull-delay0-seed2/result.json) | [Run record](raw/pilot-2026-11-15/push-delay100-seed2/result.json) | [Run record](raw/pilot-2026-11-15/pull-delay100-seed2/result.json) |
+| 3 | [Run record](raw/pilot-2026-11-15/push-delay0-seed3/result.json) | [Run record](raw/pilot-2026-11-15/pull-delay0-seed3/result.json) | [Run record](raw/pilot-2026-11-15/push-delay100-seed3/result.json) | [Run record](raw/pilot-2026-11-15/pull-delay100-seed3/result.json) |
+| 4 | [Run record](raw/pilot-2026-11-15/push-delay0-seed4/result.json) | [Run record](raw/pilot-2026-11-15/pull-delay0-seed4/result.json) | [Run record](raw/pilot-2026-11-15/push-delay100-seed4/result.json) | [Run record](raw/pilot-2026-11-15/pull-delay100-seed4/result.json) |
+| 5 | [Run record](raw/pilot-2026-11-15/push-delay0-seed5/result.json) | [Run record](raw/pilot-2026-11-15/pull-delay0-seed5/result.json) | [Run record](raw/pilot-2026-11-15/push-delay100-seed5/result.json) | [Run record](raw/pilot-2026-11-15/pull-delay100-seed5/result.json) |
 
 ## Future work
 

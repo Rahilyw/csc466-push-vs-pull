@@ -33,7 +33,7 @@ and sent fewer messages in 10. At 1 update/s and a 5 s interval, pull sent
 672 messages per run versus 960 for push at both loopback delays. Its messages
 still accounted for more application bytes.
 
-[Verified results, manifests, and summaries](results/README.md) ·
+[Results and batch summaries](results/README.md) ·
 [Reproduction instructions](results/raw/benchmark-2026-11-19/plan.md)
 
 [Experiment guide](experiments/README.md) · [Logbook](LOGBOOK.md) ·
@@ -148,7 +148,7 @@ pull comparison, and the experiment plan. [Project proposal](docs/proposal/CSC46
 | Proposal | Submitted October 10, 2026 | [PDF](docs/proposal/CSC466_Push_vs_Pull_Project_Proposal.pdf) |
 | Bi-weekly update 1 | PDF prepared November 10; course posting not recorded | [Draft](docs/updates/update-01.md) · [PDF](docs/updates/update-01.pdf) |
 | Midterm update | PDF prepared November 10; course posting not recorded | [Draft](docs/updates/update-02-midterm.md) · [PDF](docs/updates/update-02-midterm.pdf) |
-| Project update 3 | Prepared November 15; not posted to the course thread | [Draft](docs/updates/update-03-networking-and-pilot.md) · [PDF](docs/updates/update-03-networking-and-pilot.pdf) |
+| Project Update 3 | Posted in Teams for the November 16 deadline | [Draft](docs/updates/update-03-networking-and-pilot.md) · [PDF](docs/updates/update-03-networking-and-pilot.pdf) |
 | Logbook | Ongoing | [Entries](LOGBOOK.md) |
 | Presentations | Pending | [Folder](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/presentations) |
 | Final report | Pending; separate from these implementation changes | [Folder](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/report) |
