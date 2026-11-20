@@ -21,6 +21,21 @@ Entry template — copy this block to the top of the log:
 
 ---
 
+## 2026-11-19 — Longer benchmark verification
+**Who:** Adithyakrishna Arunkumar / Adi (`akaAdiArun`)
+
+- Audited the sequential benchmark against the manifests and raw logs. Recorded
+  160 converged runs, 0 timeouts, 0 measured errors,
+  0 crashes, and 0 unfinished runs across 160 planned runs.
+- Ran the full test suite after the measured queue exited. 84 tests
+  passed in 21.69 seconds.
+- Updated the shared README and current results pages with the verified study
+  coverage, matched comparisons, and reproduction instructions.
+
+[Verified results](results/README.md) · [Benchmark plan](results/raw/benchmark-2026-11-19/plan.md)
+
+---
+
 ## 2026-11-19 — Longer benchmark launched and results audited
 **Who:** Adithyakrishna Arunkumar / Adi (`akaAdiArun`)
 

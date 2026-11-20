@@ -2,9 +2,9 @@
 
 ## Longer benchmark · November 19, 2026
 
-Snapshot checked at **2026-11-19 14:33 MST**. **4 converged**,
+Snapshot checked at **2026-11-19 19:10 MST**. **160 converged**,
 **0 convergence timeouts**, **0 measured errors**,
-**0 crashes**, and **156 unfinished** across 160 planned runs.
+**0 crashes**, and **0 unfinished** across 160 planned runs.
 The full matrix takes 4 h 40 min of observation time plus process startup and
 log collection. See the measurement windows and exact commands in the
 [benchmark plan](raw/benchmark-2026-11-19/plan.md).
@@ -17,14 +17,14 @@ used shorter windows and is reported separately below.
 
 | Peers | Updates/s | Pull interval (s) | Converged | Timeout | Error | Crash | Unfinished | Verification files |
 |---:|---:|---:|---:|---:|---:|---:|---:|---|
-| 8 | 0.2 | 0.5 | 4 | 0 | 0 | 0 | 16 | [Manifest](raw/benchmark-2026-11-19/peers8-rate0.2-pull0.5/manifest.json) · [audit](raw/benchmark-2026-11-19/peers8-rate0.2-pull0.5/audit.json) |
-| 8 | 0.2 | 2 | 0 | 0 | 0 | 0 | 20 | Queued |
-| 8 | 0.2 | 5 | 0 | 0 | 0 | 0 | 20 | Queued |
-| 8 | 1 | 0.5 | 0 | 0 | 0 | 0 | 20 | Queued |
-| 8 | 1 | 2 | 0 | 0 | 0 | 0 | 20 | Queued |
-| 8 | 1 | 5 | 0 | 0 | 0 | 0 | 20 | Queued |
-| 4 | 1 | 0.5 | 0 | 0 | 0 | 0 | 20 | Queued |
-| 16 | 1 | 0.5 | 0 | 0 | 0 | 0 | 20 | Queued |
+| 8 | 0.2 | 0.5 | 20 | 0 | 0 | 0 | 0 | [Manifest](raw/benchmark-2026-11-19/peers8-rate0.2-pull0.5/manifest.json) · [audit](raw/benchmark-2026-11-19/peers8-rate0.2-pull0.5/audit.json) · [summary](raw/benchmark-2026-11-19/peers8-rate0.2-pull0.5/summary.json) |
+| 8 | 0.2 | 2 | 20 | 0 | 0 | 0 | 0 | [Manifest](raw/benchmark-2026-11-19/peers8-rate0.2-pull2/manifest.json) · [audit](raw/benchmark-2026-11-19/peers8-rate0.2-pull2/audit.json) · [summary](raw/benchmark-2026-11-19/peers8-rate0.2-pull2/summary.json) |
+| 8 | 0.2 | 5 | 20 | 0 | 0 | 0 | 0 | [Manifest](raw/benchmark-2026-11-19/peers8-rate0.2-pull5/manifest.json) · [audit](raw/benchmark-2026-11-19/peers8-rate0.2-pull5/audit.json) · [summary](raw/benchmark-2026-11-19/peers8-rate0.2-pull5/summary.json) |
+| 8 | 1 | 0.5 | 20 | 0 | 0 | 0 | 0 | [Manifest](raw/benchmark-2026-11-19/peers8-rate1-pull0.5/manifest.json) · [audit](raw/benchmark-2026-11-19/peers8-rate1-pull0.5/audit.json) · [summary](raw/benchmark-2026-11-19/peers8-rate1-pull0.5/summary.json) |
+| 8 | 1 | 2 | 20 | 0 | 0 | 0 | 0 | [Manifest](raw/benchmark-2026-11-19/peers8-rate1-pull2/manifest.json) · [audit](raw/benchmark-2026-11-19/peers8-rate1-pull2/audit.json) · [summary](raw/benchmark-2026-11-19/peers8-rate1-pull2/summary.json) |
+| 8 | 1 | 5 | 20 | 0 | 0 | 0 | 0 | [Manifest](raw/benchmark-2026-11-19/peers8-rate1-pull5/manifest.json) · [audit](raw/benchmark-2026-11-19/peers8-rate1-pull5/audit.json) · [summary](raw/benchmark-2026-11-19/peers8-rate1-pull5/summary.json) |
+| 4 | 1 | 0.5 | 20 | 0 | 0 | 0 | 0 | [Manifest](raw/benchmark-2026-11-19/peers4-rate1-pull0.5/manifest.json) · [audit](raw/benchmark-2026-11-19/peers4-rate1-pull0.5/audit.json) · [summary](raw/benchmark-2026-11-19/peers4-rate1-pull0.5/summary.json) |
+| 16 | 1 | 0.5 | 20 | 0 | 0 | 0 | 0 | [Manifest](raw/benchmark-2026-11-19/peers16-rate1-pull0.5/manifest.json) · [audit](raw/benchmark-2026-11-19/peers16-rate1-pull0.5/audit.json) · [summary](raw/benchmark-2026-11-19/peers16-rate1-pull0.5/summary.json) |
 
 ### Verified measurements at this checkpoint
 
@@ -37,18 +37,46 @@ Timeouts and operational errors have their own rows when measured metrics exist.
 
 | Peers | Updates/s | Pull interval (s) | Added delay (ms) | Mode | Outcome | Seeds | p50 (ms) | p95 (ms) | Convergence (ms) | Messages | Bytes | Idle msg/s | Idle B/s |
 |---:|---:|---:|---:|---|---|---|---:|---:|---:|---:|---:|---:|---:|
-| 8 | 0.2 | 0.5 | 0 | pull | converged | 1 | 80.4 | 1,002.5 | 587.3 | 6,720 | 514,210 | 64.0 | 5,472.0 |
-| 8 | 0.2 | 0.5 | 0 | push | converged | 1 | 2.9 | 12.5 | 12.1 | 192 | 18,160 | 0.0 | 0.0 |
-| 8 | 0.2 | 0.5 | 100 | pull | converged | 1 | 746.5 | 1,760.4 | 1,787.8 | 6,720 | 513,414 | 64.0 | 5,472.0 |
-| 8 | 0.2 | 0.5 | 100 | push | converged | 1 | 203.4 | 406.6 | 406.3 | 192 | 18,160 | 0.0 | 0.0 |
+| 8 | 0.2 | 0.5 | 0 | pull | converged | 1, 2, 3, 4, 5 | 171.1 ± 188.8 | 1,034.6 ± 33.7 | 989.2 ± 226.6 | 6,720 ± 0 | 502,037 ± 35,458 | 64.0 ± 0.0 | 5,395.2 ± 539.1 |
+| 8 | 0.2 | 0.5 | 0 | push | converged | 1, 2, 3, 4, 5 | 2.8 ± 0.4 | 10.3 ± 4.6 | 6.5 ± 3.2 | 192 ± 0 | 18,144 ± 16 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 0.2 | 0.5 | 100 | pull | converged | 1, 2, 3, 4, 5 | 753.0 ± 24.7 | 1,746.9 ± 10.7 | 1,793.4 ± 21.6 | 6,713 ± 14 | 500,708 ± 35,023 | 64.0 ± 0.0 | 5,394.4 ± 540.7 |
+| 8 | 0.2 | 0.5 | 100 | push | converged | 1, 2, 3, 4, 5 | 203.5 ± 0.2 | 406.9 ± 0.4 | 407.2 ± 2.7 | 192 ± 0 | 18,144 ± 16 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 0.2 | 2 | 0 | pull | converged | 1, 2, 3, 4, 5 | 1,617.0 ± 532.7 | 4,481.7 ± 503.1 | 4,251.3 ± 1,114.7 | 1,696 ± 0 | 129,584 ± 8,727 | 16.0 ± 0.0 | 1,348.8 ± 134.8 |
+| 8 | 0.2 | 2 | 0 | push | converged | 1, 2, 3, 4, 5 | 2.9 ± 0.3 | 7.0 ± 0.9 | 6.0 ± 1.3 | 192 ± 0 | 18,144 ± 16 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 0.2 | 2 | 100 | pull | converged | 1, 2, 3, 4, 5 | 2,722.0 ± 11.8 | 7,211.5 ± 4.5 | 7,238.2 ± 22.6 | 1,696 ± 0 | 128,899 ± 8,518 | 16.0 ± 0.0 | 1,348.8 ± 134.8 |
+| 8 | 0.2 | 2 | 100 | push | converged | 1, 2, 3, 4, 5 | 203.5 ± 0.7 | 406.6 ± 0.9 | 405.7 ± 0.6 | 192 ± 0 | 18,144 ± 16 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 0.2 | 5 | 0 | pull | converged | 1, 2, 3, 4, 5 | 1,011.7 ± 2,230.9 | 10,005.5 ± 1.0 | 6,012.3 ± 2,234.5 | 672 ± 0 | 53,798 ± 3,225 | 6.4 ± 0.0 | 539.5 ± 53.9 |
+| 8 | 0.2 | 5 | 0 | push | converged | 1, 2, 3, 4, 5 | 3.1 ± 1.4 | 8.8 ± 5.5 | 5.0 ± 1.6 | 192 ± 0 | 18,144 ± 16 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 0.2 | 5 | 100 | pull | converged | 1, 2, 3, 4, 5 | 5,209.4 ± 1.2 | 15,209.7 ± 1.3 | 15,211.2 ± 0.5 | 672 ± 0 | 53,210 ± 3,055 | 6.4 ± 0.0 | 539.5 ± 53.9 |
+| 8 | 0.2 | 5 | 100 | push | converged | 1, 2, 3, 4, 5 | 203.3 ± 0.4 | 406.3 ± 0.5 | 405.6 ± 1.1 | 192 ± 0 | 18,144 ± 16 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 1 | 0.5 | 0 | pull | converged | 1, 2, 3, 4, 5 | 161.5 ± 166.9 | 1,069.8 ± 57.3 | 785.0 ± 277.1 | 6,714 ± 14 | 769,084 ± 13,181 | 64.0 ± 0.0 | 7,808.0 ± 0.0 |
+| 8 | 1 | 0.5 | 0 | push | converged | 1, 2, 3, 4, 5 | 2.4 ± 0.2 | 6.4 ± 1.0 | 4.8 ± 1.1 | 960 ± 0 | 91,402 ± 24 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 1 | 0.5 | 100 | pull | converged | 1, 2, 3, 4, 5 | 744.8 ± 7.7 | 1,758.2 ± 12.3 | 1,781.0 ± 15.7 | 6,720 ± 0 | 768,872 ± 12,268 | 64.0 ± 0.0 | 7,808.0 ± 0.0 |
+| 8 | 1 | 0.5 | 100 | push | converged | 1, 2, 3, 4, 5 | 203.1 ± 0.1 | 406.0 ± 0.1 | 406.2 ± 1.8 | 960 ± 0 | 91,402 ± 24 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 1 | 2 | 0 | pull | converged | 1, 2, 3, 4, 5 | 1,462.3 ± 500.4 | 4,613.7 ± 542.5 | 5,025.0 ± 5.3 | 1,696 ± 0 | 213,035 ± 2,638 | 16.0 ± 0.0 | 1,952.0 ± 0.0 |
+| 8 | 1 | 2 | 0 | push | converged | 1, 2, 3, 4, 5 | 2.6 ± 0.2 | 6.6 ± 0.8 | 5.4 ± 0.8 | 960 ± 0 | 91,402 ± 24 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 1 | 2 | 100 | pull | converged | 1, 2, 3, 4, 5 | 2,738.8 ± 26.2 | 7,209.6 ± 3.1 | 7,246.9 ± 37.0 | 1,696 ± 0 | 212,106 ± 2,552 | 16.0 ± 0.0 | 1,952.0 ± 0.0 |
+| 8 | 1 | 2 | 100 | push | converged | 1, 2, 3, 4, 5 | 203.5 ± 0.5 | 407.9 ± 2.8 | 423.8 ± 40.3 | 960 ± 0 | 91,402 ± 24 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 1 | 5 | 0 | pull | converged | 1, 2, 3, 4, 5 | 4,311.5 ± 445.0 | 12,032.8 ± 687.8 | 11,016.3 ± 3.4 | 672 ± 0 | 96,468 ± 1,105 | 6.4 ± 0.0 | 780.8 ± 0.0 |
+| 8 | 1 | 5 | 0 | push | converged | 1, 2, 3, 4, 5 | 2.6 ± 0.2 | 7.8 ± 4.4 | 5.0 ± 0.9 | 960 ± 0 | 91,402 ± 24 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 8 | 1 | 5 | 100 | pull | converged | 1, 2, 3, 4, 5 | 7,210.6 ± 2.0 | 17,291.9 ± 27.2 | 16,216.2 ± 1.9 | 672 ± 0 | 95,835 ± 929 | 6.4 ± 0.0 | 780.8 ± 0.0 |
+| 8 | 1 | 5 | 100 | push | converged | 1, 2, 3, 4, 5 | 203.2 ± 0.1 | 406.3 ± 0.3 | 413.0 ± 14.4 | 960 ± 0 | 91,402 ± 24 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 4 | 1 | 0.5 | 0 | pull | converged | 1, 2, 3, 4, 5 | 78.2 ± 82.3 | 555.6 ± 69.4 | 324.0 ± 255.8 | 3,360 ± 0 | 385,556 ± 6,129 | 32.0 ± 0.0 | 3,904.0 ± 0.0 |
+| 4 | 1 | 0.5 | 0 | push | converged | 1, 2, 3, 4, 5 | 1.0 ± 0.0 | 2.9 ± 0.3 | 2.4 ± 0.2 | 480 ± 0 | 45,701 ± 12 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 4 | 1 | 0.5 | 100 | pull | converged | 1, 2, 3, 4, 5 | 254.3 ± 38.8 | 759.8 ± 5.5 | 798.0 ± 44.5 | 3,358 ± 4 | 385,239 ± 6,345 | 32.0 ± 0.0 | 3,904.0 ± 0.0 |
+| 4 | 1 | 0.5 | 100 | push | converged | 1, 2, 3, 4, 5 | 101.3 ± 0.1 | 203.2 ± 0.3 | 202.8 ± 0.7 | 480 ± 0 | 45,701 ± 12 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 16 | 1 | 0.5 | 0 | pull | converged | 1, 2, 3, 4, 5 | 945.1 ± 181.9 | 2,058.3 ± 57.4 | 1,973.3 ± 198.2 | 13,377 ± 141 | 1,527,736 ± 30,932 | 126.9 ± 2.4 | 15,484.2 ± 294.6 |
+| 16 | 1 | 0.5 | 0 | push | converged | 1, 2, 3, 4, 5 | 5.9 ± 0.4 | 14.7 ± 3.8 | 17.6 ± 12.5 | 1,920 ± 0 | 183,526 ± 97 | 0.0 ± 0.0 | 0.0 ± 0.0 |
+| 16 | 1 | 0.5 | 100 | pull | converged | 1, 2, 3, 4, 5 | 1,755.4 ± 6.3 | 3,730.5 ± 0.8 | 3,794.4 ± 11.3 | 13,440 ± 0 | 1,527,577 ± 24,534 | 128.0 ± 0.0 | 15,616.0 ± 0.0 |
+| 16 | 1 | 0.5 | 100 | push | converged | 1, 2, 3, 4, 5 | 407.3 ± 1.2 | 813.7 ± 5.5 | 812.7 ± 2.3 | 1,920 ± 0 | 183,526 ± 97 | 0.0 ± 0.0 | 0.0 ± 0.0 |
 
-The first seed at 0.2 updates/s and a 0.5 s pull interval showed the same
-ordering as the original pilot. Push had lower p50 and p95 at both delays and
-sent 192 messages per run versus pull's 6,720. Idle rates were 0 versus
-64 messages/s. The pilot used a different update rate and shorter windows.
-A measured rate comparison under the same windows, an interval comparison,
-and the scaling comparisons are pending. This one-seed checkpoint gives
-no estimate of variation across seeds.
+Across 12 complete eight-peer settings, push had lower mean run p95 in 12 and sent fewer messages in 10. Every setting compares its own five matched seeds.
+
+At 0.2 updates/s and 100 ms added loopback delay, changing the pull interval from 0.5 s to 5 s changed mean pull p95 from 1,746.9 to 15,209.7 ms and mean pull messages from 6,713.2 to 672.0 per run.
+
+At 1 updates/s and 100 ms added loopback delay, changing the pull interval from 0.5 s to 5 s changed mean pull p95 from 1,758.2 to 17,291.9 ms and mean pull messages from 6,720.0 to 672.0 per run.
+
+At a 0.5 s pull interval and 100 ms added loopback delay, raising the rate from 0.2 to 1 update/s changed push messages from 192.0 to 960.0 per run and pull messages from 6,713.2 to 6,720.0.
 
 Each pull interval has a paired push baseline. Those push runs share the same
 workload and seeds across the interval batches, so any analysis across intervals
@@ -157,5 +185,4 @@ as a complete comparison. See the [completeness checks](../experiments/README.md
 
 ## Future work
 
-Complete the remaining matched-seed benchmark batches. Peer-outage testing
-remains future work. The measurements use application delay on loopback.
+Peer-outage testing remains future work.

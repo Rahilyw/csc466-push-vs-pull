@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "status": "converged",
+  "config": {
+    "mode": "push",
+    "peers": 8,
+    "rate": 0.2,
+    "pull_interval": 2.0,
+    "delay_ms": 100.0,
+    "seed": 2,
+    "duration": 60.0,
+    "settle": 25.0,
+    "idle": 20.0,
+    "keys": 16
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41"
+  },
+  "source_sha256": "33b8d6e14a5bf4aa17dc64942fa6a6e167caba618a6419b5c2e001cc194b1a9c",
+  "workload_sha256": "4c3068eb96fc817dd1db693f7a313b5a465bb9e21c8c68dc626e52a7ceb4999b",
+  "windows": {
+    "start": 2929.254061824,
+    "workload_end": 2989.254061824,
+    "convergence_deadline": 3014.254061824,
+    "idle_start": 3014.254061824,
+    "end": 3034.254061824
+  },
+  "metrics": {
+    "converged": true,
+    "propagation_samples": 96,
+    "expected_propagation_samples": 96,
+    "missing_propagation_samples": 0,
+    "propagation_median_seconds": 0.20311993299992537,
+    "propagation_p95_seconds": 0.40599347375007255,
+    "final_convergence_seconds": 0.4054140779999216,
+    "window_seconds": 105.0,
+    "messages": 192,
+    "bytes": 18144,
+    "by_message_type": {
+      "push": {
+        "messages": 192,
+        "bytes": 18144
+      }
+    },
+    "idle_seconds": 20.0,
+    "idle_messages": 0,
+    "idle_bytes": 0,
+    "idle_messages_per_second": 0.0,
+    "idle_bytes_per_second": 0.0
+  },
+  "process_ids": [
+    1910,
+    1911,
+    1912,
+    1913,
+    1914,
+    1915,
+    1916,
+    1917
+  ],
+  "final_state_matches": true,
+  "final_records": {
+    "key-1": {
+      "key": "key-1",
+      "value": "value-5-94c9c950",
+      "version": 2,
+      "writer": 1
+    },
+    "key-2": {
+      "key": "key-2",
+      "value": "value-1-5c6e4337",
+      "version": 1,
+      "writer": 2
+    },
+    "key-5": {
+      "key": "key-5",
+      "value": "value-6-ffed9235",
+      "version": 2,
+      "writer": 5
+    },
+    "key-9": {
+      "key": "key-9",
+      "value": "value-3-4067c358",
+      "version": 1,
+      "writer": 1
+    },
+    "key-6": {
+      "key": "key-6",
+      "value": "value-4-9b575bd1",
+      "version": 1,
+      "writer": 6
+    },
+    "key-13": {
+      "key": "key-13",
+      "value": "value-7-a372db8f",
+      "version": 1,
+      "writer": 5
+    },
+    "key-12": {
+      "key": "key-12",
+      "value": "value-8-cdbd47d3",
+      "version": 1,
+      "writer": 4
+    },
+    "key-11": {
+      "key": "key-11",
+      "value": "value-9-8b4f2fc1",
+      "version": 1,
+      "writer": 3
+    },
+    "key-14": {
+      "key": "key-14",
+      "value": "value-10-80877b6f",
+      "version": 1,
+      "writer": 6
+    },
+    "key-8": {
+      "key": "key-8",
+      "value": "value-11-e6b58de7",
+      "version": 1,
+      "writer": 0
+    }
+  },
+  "errors": []
+}

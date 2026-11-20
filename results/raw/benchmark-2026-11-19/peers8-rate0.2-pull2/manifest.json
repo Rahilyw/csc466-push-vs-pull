@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "provenance": "before_run",
+  "source_sha256": "33b8d6e14a5bf4aa17dc64942fa6a6e167caba618a6419b5c2e001cc194b1a9c",
+  "runs": [
+    {
+      "directory": "pull-delay0-seed1",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 0.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "push-delay0-seed1",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 0.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "pull-delay100-seed1",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 100.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "push-delay100-seed1",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 100.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "push-delay0-seed2",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 0.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "pull-delay0-seed2",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 0.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "push-delay100-seed2",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 100.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "pull-delay100-seed2",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 100.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "pull-delay0-seed3",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 0.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "push-delay0-seed3",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 0.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "pull-delay100-seed3",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 100.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "push-delay100-seed3",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 100.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "push-delay0-seed4",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 0.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "pull-delay0-seed4",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 0.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "push-delay100-seed4",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 100.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "pull-delay100-seed4",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 100.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "pull-delay0-seed5",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 0.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "push-delay0-seed5",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 0.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "pull-delay100-seed5",
+      "config": {
+        "mode": "pull",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 100.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    },
+    {
+      "directory": "push-delay100-seed5",
+      "config": {
+        "mode": "push",
+        "peers": 8,
+        "rate": 0.2,
+        "pull_interval": 2.0,
+        "delay_ms": 100.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      }
+    }
+  ]
+}

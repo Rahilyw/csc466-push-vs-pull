@@ -24,14 +24,12 @@ settings and sent **128 messages per run**, compared with **768 for pull**.
 Push sent no idle messages, while pull sent **64 messages per second** during
 the pilot's idle window. See the [verified pilot summary](results/raw/pilot-2026-11-15/summary.json).
 
-**Longer benchmark.** The November 19 study uses 60-second workload windows
-to compare two update rates and three pull intervals, with scaling checks at
-4 and 16 peers. At the November 19 checkpoint, **4 of 160 runs** were
-verified, all converged, and 156 remained. Those four runs cover the first
-seed at 0.2 updates/s and a 0.5-second pull interval at both loopback delays.
-See the [benchmark results and coverage](results/README.md),
-[verified checkpoint](results/raw/benchmark-2026-11-19/peers8-rate0.2-pull0.5/audit.json),
-and [reproduction instructions](results/raw/benchmark-2026-11-19/plan.md).
+**Longer benchmark.** 160 of 160 measured runs converged. The audit records 0 convergence timeouts, 0 measured errors, 0 crashes, and 0 unfinished runs. The study uses 60-second workload windows to compare rates, pull intervals, and ring sizes.
+
+Across 12 complete eight-peer settings, push had lower mean run p95 in 12 and sent fewer messages in 10. Every setting compares its own five matched seeds.
+
+[Verified results, manifests, and summaries](results/README.md) ·
+[Reproduction instructions](results/raw/benchmark-2026-11-19/plan.md)
 
 [Experiment guide](experiments/README.md) · [Logbook](LOGBOOK.md) ·
 [Project update PDF](docs/updates/update-03-networking-and-pilot.pdf)
@@ -131,12 +129,10 @@ pull comparison, and the experiment plan. [Project proposal](docs/proposal/CSC46
   runner and its propagation, convergence, and traffic metrics, then ran the
   first eight-peer pilot. He later built raw-log verification tools and run
   manifest checks to audit benchmark results. For the longer benchmark, he set
-  the measurement windows, ran the first matched set of four eight-peer runs,
-  and verified their metrics from the raw logs. That set covered both modes
-  at 0 and 100 ms added loopback delay with seed 1, at 0.2 updates/s and a 0.5 s
-  pull interval.
+  the measurement windows, ran the sequential batches, and verified the
+  recorded metrics and run outcomes against the manifests and raw logs.
   [Implementation history](https://github.com/Rahilyw/csc466-push-vs-pull/compare/1324c57...58eac1c) ·
-  [Verified benchmark checkpoint](https://github.com/Rahilyw/csc466-push-vs-pull/blob/d898e0ce5d498ff2fb771f5f09bfe09778ad16fa/results/README.md)
+  [Verified benchmark results](results/README.md)
 
 [Project logbook](LOGBOOK.md)
 

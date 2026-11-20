@@ -1,0 +1,873 @@
+{
+  "source_sha256": "33b8d6e14a5bf4aa17dc64942fa6a6e167caba618a6419b5c2e001cc194b1a9c",
+  "manifest_provenance": "before_run",
+  "counts": {
+    "converged": 20,
+    "timeout": 0,
+    "error": 0,
+    "crash": 0,
+    "unfinished": 0
+  },
+  "runs": [
+    {
+      "directory": "pull-delay0-seed1",
+      "config": {
+        "mode": "pull",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 1.0176671319995876,
+        "propagation_p95_seconds": 2.0333348996011407,
+        "final_convergence_seconds": 2.0781615039995813,
+        "window_seconds": 105.0,
+        "messages": 13440,
+        "bytes": 1514783,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 6720,
+            "bytes": 1195482
+          },
+          "pull_reply": {
+            "messages": 6720,
+            "bytes": 319301
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 2560,
+        "idle_bytes": 312320,
+        "idle_messages_per_second": 128.0,
+        "idle_bytes_per_second": 15616.0
+      },
+      "errors": [],
+      "workload_sha256": "20b65e6fc3c0182654d7ada031f101c7d22537d19eb05b060af2b5550e9343d8",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay0-seed1",
+      "config": {
+        "mode": "push",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.005472810500577907,
+        "propagation_p95_seconds": 0.012648376499691938,
+        "final_convergence_seconds": 0.009433761000764207,
+        "window_seconds": 105.0,
+        "messages": 1920,
+        "bytes": 183552,
+        "by_message_type": {
+          "push": {
+            "messages": 1920,
+            "bytes": 183552
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "20b65e6fc3c0182654d7ada031f101c7d22537d19eb05b060af2b5550e9343d8",
+      "status": "converged"
+    },
+    {
+      "directory": "pull-delay100-seed1",
+      "config": {
+        "mode": "pull",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 1.7522062709995225,
+        "propagation_p95_seconds": 3.73096339814947,
+        "final_convergence_seconds": 3.802052103001188,
+        "window_seconds": 105.0,
+        "messages": 13440,
+        "bytes": 1507736,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 6720,
+            "bytes": 1188352
+          },
+          "pull_reply": {
+            "messages": 6720,
+            "bytes": 319384
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 2560,
+        "idle_bytes": 312320,
+        "idle_messages_per_second": 128.0,
+        "idle_bytes_per_second": 15616.0
+      },
+      "errors": [],
+      "workload_sha256": "20b65e6fc3c0182654d7ada031f101c7d22537d19eb05b060af2b5550e9343d8",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay100-seed1",
+      "config": {
+        "mode": "push",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 1,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.40710281299925555,
+        "propagation_p95_seconds": 0.811175536799874,
+        "final_convergence_seconds": 0.815882375000001,
+        "window_seconds": 105.0,
+        "messages": 1920,
+        "bytes": 183552,
+        "by_message_type": {
+          "push": {
+            "messages": 1920,
+            "bytes": 183552
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "20b65e6fc3c0182654d7ada031f101c7d22537d19eb05b060af2b5550e9343d8",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay0-seed2",
+      "config": {
+        "mode": "push",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.00563722799961397,
+        "propagation_p95_seconds": 0.012563703500018163,
+        "final_convergence_seconds": 0.013966758999231388,
+        "window_seconds": 105.0,
+        "messages": 1920,
+        "bytes": 183680,
+        "by_message_type": {
+          "push": {
+            "messages": 1920,
+            "bytes": 183680
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "6979a2237d6c4743870967ee3043e5d303f24813413c66d107b29f0fe54fe21e",
+      "status": "converged"
+    },
+    {
+      "directory": "pull-delay0-seed2",
+      "config": {
+        "mode": "pull",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 1.0502126554993083,
+        "propagation_p95_seconds": 2.1575395048487733,
+        "final_convergence_seconds": 1.9588583010008733,
+        "window_seconds": 105.0,
+        "messages": 13124,
+        "bytes": 1493957,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 6562,
+            "bytes": 1180396
+          },
+          "pull_reply": {
+            "messages": 6562,
+            "bytes": 313561
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 2452,
+        "idle_bytes": 299144,
+        "idle_messages_per_second": 122.6,
+        "idle_bytes_per_second": 14957.2
+      },
+      "errors": [],
+      "workload_sha256": "6979a2237d6c4743870967ee3043e5d303f24813413c66d107b29f0fe54fe21e",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay100-seed2",
+      "config": {
+        "mode": "push",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.4092814489995362,
+        "propagation_p95_seconds": 0.8235646580004867,
+        "final_convergence_seconds": 0.8130734189999202,
+        "window_seconds": 105.0,
+        "messages": 1920,
+        "bytes": 183680,
+        "by_message_type": {
+          "push": {
+            "messages": 1920,
+            "bytes": 183680
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "6979a2237d6c4743870967ee3043e5d303f24813413c66d107b29f0fe54fe21e",
+      "status": "converged"
+    },
+    {
+      "directory": "pull-delay100-seed2",
+      "config": {
+        "mode": "pull",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 2,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 1.7528471519999584,
+        "propagation_p95_seconds": 3.7314867823989517,
+        "final_convergence_seconds": 3.7915311659999134,
+        "window_seconds": 105.0,
+        "messages": 13440,
+        "bytes": 1523136,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 6720,
+            "bytes": 1203688
+          },
+          "pull_reply": {
+            "messages": 6720,
+            "bytes": 319448
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 2560,
+        "idle_bytes": 312320,
+        "idle_messages_per_second": 128.0,
+        "idle_bytes_per_second": 15616.0
+      },
+      "errors": [],
+      "workload_sha256": "6979a2237d6c4743870967ee3043e5d303f24813413c66d107b29f0fe54fe21e",
+      "status": "converged"
+    },
+    {
+      "directory": "pull-delay0-seed3",
+      "config": {
+        "mode": "pull",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 1.023748237998916,
+        "propagation_p95_seconds": 2.048504770150339,
+        "final_convergence_seconds": 2.1105177069985075,
+        "window_seconds": 105.0,
+        "messages": 13440,
+        "bytes": 1508996,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 6720,
+            "bytes": 1189660
+          },
+          "pull_reply": {
+            "messages": 6720,
+            "bytes": 319336
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 2560,
+        "idle_bytes": 312320,
+        "idle_messages_per_second": 128.0,
+        "idle_bytes_per_second": 15616.0
+      },
+      "errors": [],
+      "workload_sha256": "6cc09d3e0f63ffb612946f0f52ea0a847a5b23289e458095910b88a7ea7cb667",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay0-seed3",
+      "config": {
+        "mode": "push",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.0063864534995445865,
+        "propagation_p95_seconds": 0.02148273779948794,
+        "final_convergence_seconds": 0.03984185899935255,
+        "window_seconds": 105.0,
+        "messages": 1920,
+        "bytes": 183488,
+        "by_message_type": {
+          "push": {
+            "messages": 1920,
+            "bytes": 183488
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "6cc09d3e0f63ffb612946f0f52ea0a847a5b23289e458095910b88a7ea7cb667",
+      "status": "converged"
+    },
+    {
+      "directory": "pull-delay100-seed3",
+      "config": {
+        "mode": "pull",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 1.764534233499944,
+        "propagation_p95_seconds": 3.730667311950401,
+        "final_convergence_seconds": 3.777479778998895,
+        "window_seconds": 105.0,
+        "messages": 13440,
+        "bytes": 1501298,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 6720,
+            "bytes": 1181928
+          },
+          "pull_reply": {
+            "messages": 6720,
+            "bytes": 319370
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 2560,
+        "idle_bytes": 312320,
+        "idle_messages_per_second": 128.0,
+        "idle_bytes_per_second": 15616.0
+      },
+      "errors": [],
+      "workload_sha256": "6cc09d3e0f63ffb612946f0f52ea0a847a5b23289e458095910b88a7ea7cb667",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay100-seed3",
+      "config": {
+        "mode": "push",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 3,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.4065262594995147,
+        "propagation_p95_seconds": 0.8109026199987965,
+        "final_convergence_seconds": 0.8126613080003153,
+        "window_seconds": 105.0,
+        "messages": 1920,
+        "bytes": 183488,
+        "by_message_type": {
+          "push": {
+            "messages": 1920,
+            "bytes": 183488
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "6cc09d3e0f63ffb612946f0f52ea0a847a5b23289e458095910b88a7ea7cb667",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay0-seed4",
+      "config": {
+        "mode": "push",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.005856640000274638,
+        "propagation_p95_seconds": 0.013615784500689187,
+        "final_convergence_seconds": 0.012585642998601543,
+        "window_seconds": 105.00000000000182,
+        "messages": 1920,
+        "bytes": 183424,
+        "by_message_type": {
+          "push": {
+            "messages": 1920,
+            "bytes": 183424
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "e053db2d4a8e29f318bf055469241b6466aa40fc27242df98922c52c7cbda9e1",
+      "status": "converged"
+    },
+    {
+      "directory": "pull-delay0-seed4",
+      "config": {
+        "mode": "pull",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 1.0132229815008031,
+        "propagation_p95_seconds": 2.0423503185524168,
+        "final_convergence_seconds": 1.6344144960021367,
+        "window_seconds": 105.0,
+        "messages": 13440,
+        "bytes": 1563928,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 6720,
+            "bytes": 1244958
+          },
+          "pull_reply": {
+            "messages": 6720,
+            "bytes": 318970
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 2560,
+        "idle_bytes": 312320,
+        "idle_messages_per_second": 128.0,
+        "idle_bytes_per_second": 15616.0
+      },
+      "errors": [],
+      "workload_sha256": "e053db2d4a8e29f318bf055469241b6466aa40fc27242df98922c52c7cbda9e1",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay100-seed4",
+      "config": {
+        "mode": "push",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.40643207500033895,
+        "propagation_p95_seconds": 0.8110408843016558,
+        "final_convergence_seconds": 0.8095383060026506,
+        "window_seconds": 105.0,
+        "messages": 1920,
+        "bytes": 183424,
+        "by_message_type": {
+          "push": {
+            "messages": 1920,
+            "bytes": 183424
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "e053db2d4a8e29f318bf055469241b6466aa40fc27242df98922c52c7cbda9e1",
+      "status": "converged"
+    },
+    {
+      "directory": "pull-delay100-seed4",
+      "config": {
+        "mode": "pull",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 4,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 1.7486933564996434,
+        "propagation_p95_seconds": 3.7298824689487446,
+        "final_convergence_seconds": 3.79410412499783,
+        "window_seconds": 105.0,
+        "messages": 13440,
+        "bytes": 1556422,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 6720,
+            "bytes": 1237140
+          },
+          "pull_reply": {
+            "messages": 6720,
+            "bytes": 319282
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 2560,
+        "idle_bytes": 312320,
+        "idle_messages_per_second": 128.0,
+        "idle_bytes_per_second": 15616.0
+      },
+      "errors": [],
+      "workload_sha256": "e053db2d4a8e29f318bf055469241b6466aa40fc27242df98922c52c7cbda9e1",
+      "status": "converged"
+    },
+    {
+      "directory": "pull-delay0-seed5",
+      "config": {
+        "mode": "pull",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.6207011464994139,
+        "propagation_p95_seconds": 2.00975456600172,
+        "final_convergence_seconds": 2.0843475719993876,
+        "window_seconds": 105.0,
+        "messages": 13440,
+        "bytes": 1557016,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 6720,
+            "bytes": 1237678
+          },
+          "pull_reply": {
+            "messages": 6720,
+            "bytes": 319338
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 2560,
+        "idle_bytes": 312320,
+        "idle_messages_per_second": 128.0,
+        "idle_bytes_per_second": 15616.0
+      },
+      "errors": [],
+      "workload_sha256": "3f9325a1eb171213b9c30148531fcf939fc6212d22049e560ee364a927b403e3",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay0-seed5",
+      "config": {
+        "mode": "push",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 0.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.0061230654991959454,
+        "propagation_p95_seconds": 0.013411440197523909,
+        "final_convergence_seconds": 0.012413788001140347,
+        "window_seconds": 105.0,
+        "messages": 1920,
+        "bytes": 183488,
+        "by_message_type": {
+          "push": {
+            "messages": 1920,
+            "bytes": 183488
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "3f9325a1eb171213b9c30148531fcf939fc6212d22049e560ee364a927b403e3",
+      "status": "converged"
+    },
+    {
+      "directory": "pull-delay100-seed5",
+      "config": {
+        "mode": "pull",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 1.7588425095000275,
+        "propagation_p95_seconds": 3.729398112648232,
+        "final_convergence_seconds": 3.8070312889976776,
+        "window_seconds": 105.0,
+        "messages": 13440,
+        "bytes": 1549294,
+        "by_message_type": {
+          "pull_request": {
+            "messages": 6720,
+            "bytes": 1229972
+          },
+          "pull_reply": {
+            "messages": 6720,
+            "bytes": 319322
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 2560,
+        "idle_bytes": 312320,
+        "idle_messages_per_second": 128.0,
+        "idle_bytes_per_second": 15616.0
+      },
+      "errors": [],
+      "workload_sha256": "3f9325a1eb171213b9c30148531fcf939fc6212d22049e560ee364a927b403e3",
+      "status": "converged"
+    },
+    {
+      "directory": "push-delay100-seed5",
+      "config": {
+        "mode": "push",
+        "peers": 16,
+        "rate": 1.0,
+        "pull_interval": 0.5,
+        "delay_ms": 100.0,
+        "seed": 5,
+        "duration": 60.0,
+        "settle": 25.0,
+        "idle": 20.0,
+        "keys": 16
+      },
+      "metrics": {
+        "converged": true,
+        "propagation_samples": 960,
+        "expected_propagation_samples": 960,
+        "missing_propagation_samples": 0,
+        "propagation_median_seconds": 0.4073860645003151,
+        "propagation_p95_seconds": 0.8116955432005852,
+        "final_convergence_seconds": 0.8123622179991798,
+        "window_seconds": 105.0,
+        "messages": 1920,
+        "bytes": 183488,
+        "by_message_type": {
+          "push": {
+            "messages": 1920,
+            "bytes": 183488
+          }
+        },
+        "idle_seconds": 20.0,
+        "idle_messages": 0,
+        "idle_bytes": 0,
+        "idle_messages_per_second": 0.0,
+        "idle_bytes_per_second": 0.0
+      },
+      "errors": [],
+      "workload_sha256": "3f9325a1eb171213b9c30148531fcf939fc6212d22049e560ee364a927b403e3",
+      "status": "converged"
+    }
+  ]
+}
