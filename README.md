@@ -2,17 +2,11 @@
 
 **University of Victoria · CSC 466 · Python 3.11+**
 
-Verified locally: **83 automated tests passing** · **20 converged eight-peer pilot runs**
-
 Rahil Wijeyesekera · Hamzah Banday · Prabhnoor Singh · Adithyakrishna Arunkumar
 
-[Latest update PDF](docs/updates/update-03-networking-and-pilot.pdf) ·
-[Experiment guide](experiments/README.md) · [Results](results/README.md) ·
-[Logbook](LOGBOOK.md) · [Project website](https://rahilyw.github.io/csc466-push-vs-pull/)
-
-A small peer-to-peer key-value store for comparing **update propagation speed**
-with **communication overhead**. Peers communicate over TCP in a ring, with two
-neighbours each. A key has one designated writer and increasing version numbers.
+This peer-to-peer key-value store keeps a copy of each key at every peer.
+Each key has one writer, and increasing version numbers let peers recognize
+older copies. Peers exchange updates over TCP with their two neighbours in a ring.
 
 | Push | Pull |
 |---|---|
@@ -23,6 +17,27 @@ neighbours each. A key has one designated writer and increasing version numbers.
 The pull implementation follows the [midterm design](docs/updates/update-02-midterm.md):
 one request and one reply per neighbour, replacing the proposal's older two-step
 exchange. The experiment controller never relays synchronization records.
+
+**Original pilot.** All 20 eight-peer runs converged. At 1 update per second
+and a 0.5-second pull interval, push propagated updates faster at both delay
+settings and sent **128 messages per run**, compared with **768 for pull**.
+Push sent no idle messages, while pull sent **64 messages per second** during
+the pilot's idle window. See the [verified pilot summary](results/raw/pilot-2026-11-15/summary.json).
+
+**Longer benchmark.** All 160 measured runs converged across eight batches,
+with zero timeouts, errors, crashes, or unfinished runs. The benchmark used
+60-second workload windows to compare update rates, pull intervals, and ring sizes.
+
+Push had lower mean p95 propagation latency in all 12 eight-peer settings
+and sent fewer messages in 10. At 1 update/s and a 5 s interval, pull sent
+672 messages per run versus 960 for push at both loopback delays. Its messages
+still accounted for more application bytes.
+
+[Results and batch summaries](results/README.md) ·
+[Reproduction instructions](results/raw/benchmark-2026-11-19/plan.md)
+
+[Experiment guide](experiments/README.md) · [Logbook](LOGBOOK.md) ·
+[Project update PDF](docs/updates/update-03-networking-and-pilot.pdf)
 
 ## Quick start
 
@@ -73,12 +88,7 @@ cleanup after controller failure and explicit convergence timeouts. Performance
 observations belong in [results](results/README.md), with their raw evidence and
 limitations, rather than being inferred from test execution times.
 
-## Results and next steps
-
-The [results index](results/README.md) documents the first repeated eight-peer
-pilot and links every saved run. These short loopback observations are preliminary.
-The planned full study still includes both update rates, all three pull intervals,
-longer workload/idle windows, and 4/16-peer scaling checks.
+## Benchmark settings and future work
 
 | Planned parameter | Values |
 |---|---|
@@ -88,9 +98,10 @@ longer workload/idle windows, and 4/16-peer scaling checks.
 | Peers | 8 main; 4 and 16 scaling checks |
 | Repetitions | At least five matched seeds per configuration |
 
-Peers currently assume a stable ring on one host. There is no churn/recovery
-protocol or automatic retry. Byte counts include the four-byte application
-prefix and JSON, excluding TCP/IP headers and controller messages. Acceptance
+Peer-outage testing remains future work. The current experiments use a stable
+ring on one host, with configurable added one-way loopback delay. Byte counts
+include the four-byte application prefix and JSON and exclude TCP/IP headers
+and controller messages. Acceptance
 and send events use the shared host monotonic clock; raw logs make the summaries
 auditable. The [experiment guide](experiments/README.md) explains deadlines,
 missing samples, equal observation windows and quantile aggregation.
@@ -123,12 +134,10 @@ pull comparison, and the experiment plan. [Project proposal](docs/proposal/CSC46
   runner and its propagation, convergence, and traffic metrics, then ran the
   first eight-peer pilot. He later built raw-log verification tools and run
   manifest checks to audit benchmark results. For the longer benchmark, he set
-  the measurement windows, ran the first matched set of four eight-peer runs,
-  and verified their metrics from the raw logs. That set covered both modes
-  at 0 and 100 ms added loopback delay with seed 1, at 0.2 updates/s and a 0.5 s
-  pull interval.
+  the measurement windows, ran the sequential batches, and verified the
+  recorded metrics and run outcomes against the manifests and raw logs.
   [Implementation history](https://github.com/Rahilyw/csc466-push-vs-pull/compare/1324c57...58eac1c) ·
-  [Verified benchmark checkpoint](https://github.com/Rahilyw/csc466-push-vs-pull/blob/d898e0ce5d498ff2fb771f5f09bfe09778ad16fa/results/README.md)
+  [Verified benchmark results](results/README.md)
 
 [Project logbook](LOGBOOK.md)
 
@@ -139,7 +148,7 @@ pull comparison, and the experiment plan. [Project proposal](docs/proposal/CSC46
 | Proposal | Submitted October 10, 2026 | [PDF](docs/proposal/CSC466_Push_vs_Pull_Project_Proposal.pdf) |
 | Bi-weekly update 1 | PDF prepared November 10; course posting not recorded | [Draft](docs/updates/update-01.md) · [PDF](docs/updates/update-01.pdf) |
 | Midterm update | PDF prepared November 10; course posting not recorded | [Draft](docs/updates/update-02-midterm.md) · [PDF](docs/updates/update-02-midterm.pdf) |
-| Project update 3 | Prepared November 15; not posted to the course thread | [Draft](docs/updates/update-03-networking-and-pilot.md) · [PDF](docs/updates/update-03-networking-and-pilot.pdf) |
+| Project Update 3 | Posted in Teams for the November 16 deadline | [Draft](docs/updates/update-03-networking-and-pilot.md) · [PDF](docs/updates/update-03-networking-and-pilot.pdf) |
 | Logbook | Ongoing | [Entries](LOGBOOK.md) |
 | Presentations | Pending | [Folder](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/presentations) |
 | Final report | Pending; separate from these implementation changes | [Folder](https://github.com/Rahilyw/csc466-push-vs-pull/tree/main/docs/report) |

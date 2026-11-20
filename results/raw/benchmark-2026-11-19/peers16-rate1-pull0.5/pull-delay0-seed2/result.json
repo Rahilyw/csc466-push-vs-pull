@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "status": "converged",
+  "config": {
+    "mode": "pull",
+    "peers": 16,
+    "rate": 1.0,
+    "pull_interval": 0.5,
+    "delay_ms": 0.0,
+    "seed": 2,
+    "duration": 60.0,
+    "settle": 25.0,
+    "idle": 20.0,
+    "keys": 16
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41"
+  },
+  "source_sha256": "33b8d6e14a5bf4aa17dc64942fa6a6e167caba618a6419b5c2e001cc194b1a9c",
+  "workload_sha256": "6979a2237d6c4743870967ee3043e5d303f24813413c66d107b29f0fe54fe21e",
+  "windows": {
+    "start": 15570.569150515,
+    "workload_end": 15630.569150515,
+    "convergence_deadline": 15655.569150515,
+    "idle_start": 15655.569150515,
+    "end": 15675.569150515
+  },
+  "metrics": {
+    "converged": true,
+    "propagation_samples": 960,
+    "expected_propagation_samples": 960,
+    "missing_propagation_samples": 0,
+    "propagation_median_seconds": 1.0502126554993083,
+    "propagation_p95_seconds": 2.1575395048487733,
+    "final_convergence_seconds": 1.9588583010008733,
+    "window_seconds": 105.0,
+    "messages": 13124,
+    "bytes": 1493957,
+    "by_message_type": {
+      "pull_request": {
+        "messages": 6562,
+        "bytes": 1180396
+      },
+      "pull_reply": {
+        "messages": 6562,
+        "bytes": 313561
+      }
+    },
+    "idle_seconds": 20.0,
+    "idle_messages": 2452,
+    "idle_bytes": 299144,
+    "idle_messages_per_second": 122.6,
+    "idle_bytes_per_second": 14957.2
+  },
+  "process_ids": [
+    3052,
+    3053,
+    3054,
+    3055,
+    3056,
+    3057,
+    3058,
+    3059,
+    3060,
+    3061,
+    3062,
+    3063,
+    3064,
+    3065,
+    3066,
+    3067
+  ],
+  "final_state_matches": true,
+  "final_records": {
+    "key-1": {
+      "key": "key-1",
+      "value": "value-59-0e8a35b1",
+      "version": 6,
+      "writer": 1
+    },
+    "key-2": {
+      "key": "key-2",
+      "value": "value-47-c8c69069",
+      "version": 2,
+      "writer": 2
+    },
+    "key-5": {
+      "key": "key-5",
+      "value": "value-40-e06f291b",
+      "version": 8,
+      "writer": 5
+    },
+    "key-9": {
+      "key": "key-9",
+      "value": "value-43-f515a823",
+      "version": 2,
+      "writer": 9
+    },
+    "key-6": {
+      "key": "key-6",
+      "value": "value-57-f18e8598",
+      "version": 4,
+      "writer": 6
+    },
+    "key-13": {
+      "key": "key-13",
+      "value": "value-44-4fd5079e",
+      "version": 3,
+      "writer": 13
+    },
+    "key-12": {
+      "key": "key-12",
+      "value": "value-29-b714210c",
+      "version": 3,
+      "writer": 12
+    },
+    "key-11": {
+      "key": "key-11",
+      "value": "value-46-ef24bd62",
+      "version": 6,
+      "writer": 11
+    },
+    "key-14": {
+      "key": "key-14",
+      "value": "value-37-7c9260dc",
+      "version": 8,
+      "writer": 14
+    },
+    "key-8": {
+      "key": "key-8",
+      "value": "value-56-3ead4efe",
+      "version": 4,
+      "writer": 8
+    },
+    "key-0": {
+      "key": "key-0",
+      "value": "value-49-e85bfcdd",
+      "version": 2,
+      "writer": 0
+    },
+    "key-10": {
+      "key": "key-10",
+      "value": "value-48-b9d7d01f",
+      "version": 3,
+      "writer": 10
+    },
+    "key-7": {
+      "key": "key-7",
+      "value": "value-53-aeb6db2c",
+      "version": 4,
+      "writer": 7
+    },
+    "key-15": {
+      "key": "key-15",
+      "value": "value-42-4f3f8777",
+      "version": 2,
+      "writer": 15
+    },
+    "key-3": {
+      "key": "key-3",
+      "value": "value-54-c11e60de",
+      "version": 2,
+      "writer": 3
+    },
+    "key-4": {
+      "key": "key-4",
+      "value": "value-55-da9c025a",
+      "version": 1,
+      "writer": 4
+    }
+  },
+  "errors": []
+}

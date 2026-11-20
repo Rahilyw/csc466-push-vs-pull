@@ -21,6 +21,37 @@ Entry template — copy this block to the top of the log:
 
 ---
 
+## 2026-11-19 — Longer benchmark verification
+**Who:** Adithyakrishna Arunkumar / Adi (`akaAdiArun`)
+
+- Audited the sequential benchmark against the manifests and raw logs. All
+  160 runs converged across eight batches, with zero timeouts, measured errors,
+  crashes, or unfinished runs.
+- Ran the full test suite after the measured queue exited. 84 tests
+  passed in 21.69 seconds.
+- Updated the shared README and current results pages with the verified study
+  coverage, matched comparisons, and reproduction instructions.
+- Confirmed that Project Update 3 was posted in Teams for the November 16 deadline.
+
+[Verified results](results/README.md) · [Benchmark plan](results/raw/benchmark-2026-11-19/plan.md)
+
+---
+
+## 2026-11-19 — Longer benchmark launched and results audited
+**Who:** Adithyakrishna Arunkumar / Adi (`akaAdiArun`)
+
+- Started from `origin/main` at `58eac1c`. The baseline suite passed all 83 tests in 19.13 s. A separate four-run smoke batch converged at both added delays.
+- Recorded the 60 s workload, 25 s settling and 20 s idle windows before starting the measured queue. The six eight-peer batches run in sequence before the two scaling batches. The pilot writes each batch manifest before launching workers.
+- At the first checkpoint, four runs had converged with zero timeouts, measured errors, or crashes. They cover both modes and both delays at eight peers, 0.2 updates/s, a 0.5 s pull interval, and seed 1. The first batch has 16 more runs and the remaining seven batches have 140. The queue was still running when the checkpoint was recorded.
+- Added a manifest audit for partial batches. It verifies the raw logs and reports convergence timeouts, measured errors, crashes, and unfinished entries separately. The focused metrics, summary, and store checks passed all 34 tests after the change. A separate reanalysis reproduced the original pilot summaries.
+- Updated the shared README and GitHub Pages source with the verified pilot takeaway, benchmark coverage and contribution credit. GitHub Pages publishes the root of `main`. These changes are on the benchmark branch.
+
+**Next:** Finish the measured queue and check the full batch summaries before publishing the updated homepage. Peer-outage measurements remain future work.
+
+**Links:** [benchmark plan](results/raw/benchmark-2026-11-19/plan.md) · [results and audit links](results/README.md)
+
+---
+
 ## 2026-11-18 — Verify experiment completeness before summarizing
 **Who:** Adithyakrishna Arunkumar / Adi (`akaAdiArun`)
 **Done:**
