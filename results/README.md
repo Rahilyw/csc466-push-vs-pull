@@ -2,9 +2,12 @@
 
 ## Longer benchmark · November 19, 2026
 
-Snapshot checked at **2026-11-19 19:10 MST**. **160 converged**,
-**0 convergence timeouts**, **0 measured errors**,
-**0 crashes**, and **0 unfinished** across 160 planned runs.
+The original queue finished at **7:09:36 p.m. Vancouver time on November 19**.
+All eight batches matched their manifests. **160 converged**, with **0 timeouts**,
+**0 measured errors**, **0 crashes**, and **0 unfinished**. All 58,560 expected
+update/peer propagation samples were present, including each update's writer.
+The saved workloads and both summary formats matched independent recomputation
+from the raw logs.
 The full matrix takes 4 h 40 min of observation time plus process startup and
 log collection. See the measurement windows and exact commands in the
 [benchmark plan](raw/benchmark-2026-11-19/plan.md).
@@ -26,7 +29,7 @@ used shorter windows and is reported separately below.
 | 4 | 1 | 0.5 | 20 | 0 | 0 | 0 | 0 | [Manifest](raw/benchmark-2026-11-19/peers4-rate1-pull0.5/manifest.json) · [audit](raw/benchmark-2026-11-19/peers4-rate1-pull0.5/audit.json) · [summary](raw/benchmark-2026-11-19/peers4-rate1-pull0.5/summary.json) |
 | 16 | 1 | 0.5 | 20 | 0 | 0 | 0 | 0 | [Manifest](raw/benchmark-2026-11-19/peers16-rate1-pull0.5/manifest.json) · [audit](raw/benchmark-2026-11-19/peers16-rate1-pull0.5/audit.json) · [summary](raw/benchmark-2026-11-19/peers16-rate1-pull0.5/summary.json) |
 
-### Verified measurements at this checkpoint
+### Verified measurements
 
 Values are per-run statistics when a row has one seed. With multiple seeds,
 values are means ± sample standard deviations. The p50 and p95 columns summarize
@@ -70,18 +73,28 @@ Timeouts and operational errors have their own rows when measured metrics exist.
 | 16 | 1 | 0.5 | 100 | pull | converged | 1, 2, 3, 4, 5 | 1,755.4 ± 6.3 | 3,730.5 ± 0.8 | 3,794.4 ± 11.3 | 13,440 ± 0 | 1,527,577 ± 24,534 | 128.0 ± 0.0 | 15,616.0 ± 0.0 |
 | 16 | 1 | 0.5 | 100 | push | converged | 1, 2, 3, 4, 5 | 407.3 ± 1.2 | 813.7 ± 5.5 | 812.7 ± 2.3 | 1,920 ± 0 | 183,526 ± 97 | 0.0 ± 0.0 | 0.0 ± 0.0 |
 
-Across 12 complete eight-peer settings, push had lower mean run p95 in 12 and sent fewer messages in 10. Every setting compares its own five matched seeds.
+Push had lower mean run p95 in all 12 eight-peer settings and sent fewer
+messages in 10. Every setting compares its own five matched seeds. The two
+exceptions were the 1 update/s runs with a 5 s pull interval. At both loopback
+delays, pull averaged 672 messages per run versus 960 for push, while sending
+more application bytes. At 100 ms, the means were about 95,835 bytes for pull
+and 91,402 bytes for push.
 
 At 0.2 updates/s and 100 ms added loopback delay, changing the pull interval from 0.5 s to 5 s changed mean pull p95 from 1,746.9 to 15,209.7 ms and mean pull messages from 6,713.2 to 672.0 per run.
 
-At 1 updates/s and 100 ms added loopback delay, changing the pull interval from 0.5 s to 5 s changed mean pull p95 from 1,758.2 to 17,291.9 ms and mean pull messages from 6,720.0 to 672.0 per run.
+At 1 update/s and 100 ms added loopback delay, changing the pull interval from 0.5 s to 5 s changed mean pull p95 from 1,758.2 to 17,291.9 ms and mean pull messages from 6,720 to 672 per run.
 
 At a 0.5 s pull interval and 100 ms added loopback delay, raising the rate from 0.2 to 1 update/s changed push messages from 192.0 to 960.0 per run and pull messages from 6,713.2 to 6,720.0.
 
 Each pull interval has a paired push baseline. Those push runs share the same
 workload and seeds across the interval batches, so any analysis across intervals
-must keep the comparisons separate. The 4- and 16-peer results use the eight-peer
-1 update/s and 0.5 s batch as their reference once all three are available.
+must keep the comparisons separate.
+
+The scaling batches use 1 update/s and a 0.5 s pull interval. With 100 ms
+added loopback delay, mean run p95 rose from 203.2 ms at 4 peers to 406.0 ms at
+8 and 813.7 ms at 16 for push. For pull it rose from 759.8 ms to 1,758.2 ms and
+3,730.5 ms across the same sizes. These measurements describe a single-host
+TCP ring with added application delay.
 
 ## Original eight-peer pilot · November 15, 2026
 

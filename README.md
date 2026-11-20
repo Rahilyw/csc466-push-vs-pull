@@ -24,9 +24,14 @@ settings and sent **128 messages per run**, compared with **768 for pull**.
 Push sent no idle messages, while pull sent **64 messages per second** during
 the pilot's idle window. See the [verified pilot summary](results/raw/pilot-2026-11-15/summary.json).
 
-**Longer benchmark.** 160 of 160 measured runs converged. The audit records 0 convergence timeouts, 0 measured errors, 0 crashes, and 0 unfinished runs. The study uses 60-second workload windows to compare rates, pull intervals, and ring sizes.
+**Longer benchmark.** All 160 measured runs converged across eight batches,
+with zero timeouts, errors, crashes, or unfinished runs. The benchmark used
+60-second workload windows to compare update rates, pull intervals, and ring sizes.
 
-Across 12 complete eight-peer settings, push had lower mean run p95 in 12 and sent fewer messages in 10. Every setting compares its own five matched seeds.
+Push had lower mean p95 propagation latency in all 12 eight-peer settings
+and sent fewer messages in 10. At 1 update/s and a 5 s interval, pull sent
+672 messages per run versus 960 for push at both loopback delays. Its messages
+still accounted for more application bytes.
 
 [Verified results, manifests, and summaries](results/README.md) ·
 [Reproduction instructions](results/raw/benchmark-2026-11-19/plan.md)
